@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --vermillion: #D63230;
+  --ink: #1a1a2e;
+  --paper: #FAF6F1;
+  --indigo: #3D5A80;
+  --ink-faded: rgba(26, 26, 46, 0.7);
+  --ink-ghost: rgba(26, 26, 46, 0.35);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* TipTap editor styles */
+.tiptap {
+  outline: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.tiptap p {
+  font-family: var(--font-newsreader), serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--ink-faded);
+  margin-bottom: 1.25em;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.tiptap h1,
+.tiptap h2,
+.tiptap h3 {
+  font-family: var(--font-playfair), serif;
+  color: var(--ink);
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+.tiptap h1 { font-size: 2.5rem; line-height: 1.2; }
+.tiptap h2 { font-size: 1.75rem; line-height: 1.3; }
+.tiptap h3 { font-size: 1.25rem; line-height: 1.4; }
+
+.tiptap strong { font-weight: 700; color: var(--ink); }
+.tiptap em { font-style: italic; }
+
+.tiptap code {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 0.85em;
+  background: rgba(26, 26, 46, 0.06);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+
+.tiptap blockquote {
+  border-left: 3px solid var(--vermillion);
+  padding-left: 1.25em;
+  margin-left: 0;
+  font-style: italic;
+  color: var(--ink-faded);
+}
+
+.tiptap hr {
+  border: none;
+  border-top: 1px solid rgba(26, 26, 46, 0.1);
+  margin: 2em 0;
+}
+
+.tiptap ul, .tiptap ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+}
+
+.tiptap li {
+  font-family: var(--font-newsreader), serif;
+  line-height: 1.8;
+  color: var(--ink-faded);
+}
+
+/* Placeholder */
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--ink-ghost);
+  pointer-events: none;
+  height: 0;
+  font-family: var(--font-newsreader), serif;
+  font-style: italic;
+}
+
+/* Selection */
+.tiptap ::selection {
+  background: rgba(214, 50, 48, 0.15);
 }

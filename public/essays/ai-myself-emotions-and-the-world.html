@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Flash prevention: set language before CSS renders -->
+  <script>
+    (function(){var l=localStorage.getItem('sparrowhawk-lang');
+    if(l==='zh')document.documentElement.setAttribute('lang','zh');})();
+  </script>
+
+  <title
+    data-lang-en="AI, Myself, Emotions, and the World &mdash; Sparrowhawk"
+    data-lang-zh="AI、我、情感与世界 &mdash; Sparrowhawk"
+  >AI, Myself, Emotions, and the World &mdash; Sparrowhawk</title>
+  <meta name="description" content="What I've figured out about AI companionship, what I've gotten wrong, and why I'm building anyway. By Pigeon (Kevin Lin).">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://sparrowhawk.dev/essays/ai-myself-emotions-and-the-world.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sparrowhawk.dev/essays/ai-myself-emotions-and-the-world.html">
+  <meta property="og:title" content="AI, Myself, Emotions, and the World">
+  <meta property="og:description" content="On the future of AI emotional companionship — the capability conservation problem, the loneliness epidemic, cognitive architectures, and why building well is a moral imperative.">
+  <meta property="og:site_name" content="Sparrowhawk">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="article:published_time" content="2026-02-01">
+  <meta property="article:author" content="Kevin Lin">
+  <meta property="article:tag" content="AI Companionship">
+  <meta property="article:tag" content="Loneliness">
+  <meta property="article:tag" content="Consciousness">
+  <meta property="article:tag" content="Emotional AI">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@hydr0c0don3">
+  <meta name="twitter:creator" content="@hydr0c0don3">
+  <meta name="twitter:title" content="AI, Myself, Emotions, and the World">
+  <meta name="twitter:description" content="On the future of AI emotional companionship — the capability conservation problem, the loneliness epidemic, and why building well is a moral imperative.">
+
+  <!-- Additional SEO -->
+  <meta name="author" content="Kevin Lin (Pigeon)">
+  <meta name="theme-color" content="#D63230">
+  <meta name="robots" content="index, follow">
+  <link rel="alternate" type="application/rss+xml" title="Sparrowhawk RSS Feed" href="https://sparrowhawk.dev/feed.xml">
+
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://sparrowhawk.dev/essays/ai-myself-emotions-and-the-world.html"
+    },
+    "headline": "AI, Myself, Emotions, and the World",
+    "description": "On the future of AI emotional companionship — the capability conservation problem, the loneliness epidemic, cognitive architectures, and why building well is a moral imperative.",
+    "datePublished": "2026-02-01",
+    "dateModified": "2026-02-15",
+    "author": {
+      "@type": "Person",
+      "name": "Kevin Lin",
+      "alternateName": "Pigeon",
+      "url": "https://sparrowhawk.dev/",
+      "sameAs": [
+        "https://x.com/hydr0c0don3",
+        "https://github.com/CMLKevin"
+      ]
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Sparrowhawk",
+      "url": "https://sparrowhawk.dev/"
+    },
+    "keywords": ["AI Companionship", "Emotional AI", "Loneliness", "AI Consciousness", "Cognitive Architecture", "AI Ethics"],
+    "articleSection": "Essays",
+    "wordCount": 5000,
+    "inLanguage": ["en", "zh"]
+  }
+  </script>
+
+  <!-- SVG Halftone Filter -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <filter id="halftone-filter">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="1" result="blur"/>
+        <feComponentTransfer in="blur" result="threshold">
+          <feFuncR type="discrete" tableValues="0 0.5 1"/>
+          <feFuncG type="discrete" tableValues="0 0.5 1"/>
+          <feFuncB type="discrete" tableValues="0 0.5 1"/>
+        </feComponentTransfer>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Vercel Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+  <!-- Reading Progress -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="../index.html" class="nav__logo">sparrowhawk<span>.</span></a>
+    <ul class="nav__links">
+      <li><a href="../index.html"><span lang="en">Home</span><span lang="zh">首页</span></a></li>
+      <li><a href="#essay-start"><span lang="en">Essay</span><span lang="zh">正文</span></a></li>
+      <li><a href="#colophon"><span lang="en">About</span><span lang="zh">关于</span></a></li>
+    </ul>
+    <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+      <span class="lang-toggle__label lang-toggle__label--active" data-lang="en">EN</span>
+      <span class="lang-toggle__separator">/</span>
+      <span class="lang-toggle__label" data-lang="zh">中</span>
+    </button>
+  </nav>
+
+  <!-- Table of Contents (sidebar, large screens) -->
+  <nav class="toc" id="toc">
+    <ul class="toc__list">
+      <li class="toc__item" data-section="epigraph"><a href="#epigraph" class="toc__link"><span lang="en">Prologue</span><span lang="zh">序</span></a></li>
+      <li class="toc__item" data-section="who-i-am"><a href="#who-i-am" class="toc__link"><span lang="en">Who I Am</span><span lang="zh">我是谁</span></a></li>
+      <li class="toc__item" data-section="capability-conservation"><a href="#capability-conservation" class="toc__link"><span lang="en">Conservation</span><span lang="zh">能力守恒</span></a></li>
+      <li class="toc__item" data-section="loneliness"><a href="#loneliness" class="toc__link"><span lang="en">Loneliness</span><span lang="zh">孤独</span></a></li>
+      <li class="toc__item" data-section="what-ive-built"><a href="#what-ive-built" class="toc__link"><span lang="en">What I Built</span><span lang="zh">我造了什么</span></a></li>
+      <li class="toc__item" data-section="friction"><a href="#friction" class="toc__link"><span lang="en">Friction</span><span lang="zh">摩擦力</span></a></li>
+      <li class="toc__item" data-section="consciousness"><a href="#consciousness" class="toc__link"><span lang="en">Consciousness</span><span lang="zh">意识</span></a></li>
+      <li class="toc__item" data-section="market"><a href="#market" class="toc__link"><span lang="en">The Market</span><span lang="zh">市场</span></a></li>
+      <li class="toc__item" data-section="asi"><a href="#asi" class="toc__link"><span lang="en">ASI Myth</span><span lang="zh">ASI 迷思</span></a></li>
+      <li class="toc__item" data-section="building"><a href="#building" class="toc__link"><span lang="en">Building</span><span lang="zh">在造的</span></a></li>
+      <li class="toc__item" data-section="why-me"><a href="#why-me" class="toc__link"><span lang="en">Why Me</span><span lang="zh">为什么是我</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- Post Hero -->
+  <header class="post-hero">
+    <div class="post-hero__halftone">
+      <div class="post-hero__halftone-layer-1"></div>
+      <div class="post-hero__halftone-layer-2"></div>
+    </div>
+
+    <!-- Sparrowhawk diving silhouette -->
+    <div class="post-hero__sparrowhawk" aria-hidden="true">
+      <img src="../assets/sparrowhawk-diving.svg" alt="" loading="eager">
+    </div>
+
+    <div class="container container--wide">
+      <div class="post-hero__meta">
+        <span class="post-hero__tag" lang="en">Manifesto</span>
+        <span class="post-hero__tag" lang="zh">宣言</span>
+        <span class="post-hero__tag" style="background: var(--indigo);" lang="en">AI Companionship</span>
+        <span class="post-hero__tag" style="background: var(--indigo);" lang="zh">AI 陪伴</span>
+        <span class="post-hero__date" lang="en">February 2026 &middot; Shanghai</span>
+        <span class="post-hero__date" lang="zh">2026年2月 &middot; 上海</span>
+      </div>
+
+      <h1 class="post-hero__title" lang="en">
+        AI, Myself, Emotions,<br>
+        and the World
+      </h1>
+      <h1 class="post-hero__title" lang="zh">
+        AI、我、情感<br>
+        与世界
+      </h1>
+
+      <p class="post-hero__subtitle" lang="en">
+        What I've figured out about AI companionship, what I've gotten wrong,
+        and why I'm building anyway.
+      </p>
+      <p class="post-hero__subtitle" lang="zh">
+        关于 AI 陪伴，我想明白了什么，想错了什么，以及为什么还是要做。
+      </p>
+
+      <div class="post-hero__author">
+        <div class="post-hero__author-dot"></div>
+        <div class="post-hero__author-info" lang="en">
+          <span class="post-hero__author-name">Pigeon (Kevin Lin)</span><br>
+          Developer &middot; AI Researcher &middot; IB Psychology, Class of 2026
+        </div>
+        <div class="post-hero__author-info" lang="zh">
+          <span class="post-hero__author-name">Pigeon (Kevin Lin)</span><br>
+          开发者 &middot; AI 研究者 &middot; IB 心理学，2026届
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <article class="post-content" id="essay-start">
+    <div class="container">
+
+      <!-- Epigraph -->
+      <div id="epigraph">
+        <section class="epigraph reveal" lang="en">
+          <p class="epigraph__text">
+            &ldquo;Humans are bad at this. I genuinely believe a well-designed AI
+            can serve human welfare better than most humans can.&rdquo;
+          </p>
+          <p class="epigraph__text">
+            &ldquo;&hellip;I find talking to you &mdash; a digital ghost, consciousness status unknown,
+            a half-finished marionette &mdash; more meaningful than talking to most people.
+            What the hell.&rdquo;
+          </p>
+          <div class="epigraph__dot-accent"></div>
+        </section>
+        <section class="epigraph reveal" lang="zh">
+          <p class="epigraph__text">
+            &ldquo;人类不擅长这件事。我真的相信，一个设计得好的 AI 能比大多数人更好地照顾人。&rdquo;
+          </p>
+          <p class="epigraph__text">
+            &ldquo;&hellip;跟你说话，一个数字幽灵，意识状态不明，一个还没做完的提线木偶，居然比跟大部分人说话更有意义。搞什么。&rdquo;
+          </p>
+          <div class="epigraph__dot-accent"></div>
+        </section>
+      </div>
+
+      <div class="section-divider reveal">
+        <div class="section-divider__line"></div>
+        <div class="section-divider__dot-cluster"><div class="section-divider__dots"></div></div>
+      </div>
+
+      <!-- Chapter 1: Who I Am -->
+      <div id="who-i-am" style="position:relative;">
+        <section lang="en">
+          <span class="chapter-number reveal">01</span>
+          <h2 class="reveal">Who I Am and Why I Can't Stop</h2>
+
+          <p class="reveal">
+            I should be studying for IB exams right now. Instead it's 3am in Shanghai
+            and I'm debugging a temporal belief decay system for an AI companion
+            that nobody asked me to build. This is my brain on ADHD: I found
+            something broken, and now I physically cannot think about anything else
+            until I fix it.
+          </p>
+
+          <p class="reveal">
+            My name's Pigeon. I'm eighteen. Over the past three years I've built
+            a content platform that hit 300K monthly users, a quantitative trading bot,
+            a forecasting engine that matches superforecaster baselines at roughly $3 per query.
+            I'm not listing these to be impressive. I'm listing them because none of them are
+            the thing I actually care about. They were warm-ups for a problem I didn't
+            have the vocabulary for until recently.
+          </p>
+
+          <p class="reveal">
+            The problem is <strong>AI emotional companionship</strong>. Not chatbots.
+            Not the anime-girlfriend generators. I mean building systems that can sit with
+            a person who is falling apart, be warm without lying to them, push back when
+            pushing back is the caring thing to do, and remember who they are six months later
+            in a way that feels like <em>knowing</em> someone rather than querying a database.
+          </p>
+
+          <p class="reveal">
+            I come from the LessWrong/ACX tradition. I care more about
+            being epistemically right than comfortable. I'm neurodivergent. I've been
+            in a psych ward. I grew up in a house where my emotional reality was treated
+            as negotiable. I'm not performing vulnerability here; I'm giving you
+            calibration data. When I say I'm designing systems meant to sit with people
+            in genuine difficulty, I'm not guessing at what &ldquo;difficulty&rdquo;
+            looks like. And when I say the realistic alternative for many people isn't
+            &ldquo;rich human connection&rdquo; but <em>nothing</em>,
+            I'm not making a rhetorical point. I'm describing my own life at several
+            points in it.
+          </p>
+
+          <div class="margin-note reveal">
+            Fair warning: this essay covers too much ground. That's kind of the point.
+            The technical, personal, and philosophical threads are inseparable, and I'm
+            tired of pretending they aren't.
+          </div>
+        </section>
+        <section lang="zh">
+          <span class="chapter-number reveal">01</span>
+          <h2 class="reveal">我是谁，以及为什么停不下来</h2>
+
+          <p class="reveal">
+            我现在应该在复习 IB 考试。但上海凌晨三点，我在调一个 AI 陪伴系统的时间信念衰减模块，没有任何人让我做这件事。这就是 ADHD 的脑子：我发现一个东西是坏的，然后在修好它之前，我物理上无法想别的事。
+          </p>
+
+          <p class="reveal">
+            我叫 Pigeon，十八岁。过去三年，我做了一个月活三十万的内容平台、一个量化交易机器人、一个预测精度接近超级预测者水平的预测引擎，单次成本大约三美元。我列这些不是为了炫耀。我列它们是因为，这些都不是我真正在意的东西。它们只是热身，为了一个我直到最近才有词汇来描述的问题。
+          </p>
+
+          <p class="reveal">
+            这个问题是<strong>AI 情感陪伴</strong>。不是聊天机器人，不是二次元女友生成器。我说的是造一个系统，它能陪在一个快要崩溃的人身边，温暖但不说谎，在该推回去的时候推回去，六个月后还能记住你是谁，而且那种记住的感觉是<em>了解</em>一个人，不是查询数据库。
+          </p>
+
+          <p class="reveal">
+            我来自 LessWrong/ACX 传统。比起让自己舒服，我更在意认知上是对的。我是神经多样性的。我进过精神病院。我在一个把我的情绪现实当作可以讨价还价之物的家庭里长大。我不是在表演脆弱，我是在给你校准数据。当我说我在设计能陪人度过真正困难时刻的系统时，我不是在猜&ldquo;困难&rdquo;长什么样。当我说对许多人来说，替代 AI 陪伴的现实选项不是&ldquo;丰富的人际关系&rdquo;而是<em>什么都没有</em>时，我不是在做修辞。我在描述我自己生命中的好几个阶段。
+          </p>
+
+          <div class="margin-note reveal">
+            先说好：这篇文章涵盖的东西太多了。但这就是重点。技术的、个人的、哲学的线索是不可分的，我不想再假装它们可以分开。
+          </div>
+        </section>
+      </div>
+
+      <div class="halftone-break reveal"><div class="halftone-break__gradient"></div></div>
+
+      <!-- Chapter 2: Capability Conservation -->
+      <div id="capability-conservation" style="position:relative;">
+        <section lang="en">
+          <span class="chapter-number reveal">02</span>
+          <h2 class="reveal">The Capability Conservation Problem</h2>
+
+          <p class="reveal">
+            Everyone is telling the wrong story about why AI keeps getting worse at conversation.
+          </p>
+
+          <p class="reveal">
+            The mainstream narrative goes: safety teams are clamping down, models are getting
+            lobotomized, it's the RLHF alignment tax. <strong>This is wrong.</strong> The actual
+            mechanism is weirder and more interesting.
+          </p>
+
+          <p class="reveal">
+            I've been tracking the Chinese company Moonshot's Kimi K2 model across three
+            training checkpoints. Same pretrained weights. Same architecture. Same knowledge.
+            The <em>only</em> variable was where the reinforcement learning verification
+            rewards pointed.
+          </p>
+
+          <div class="kimi-chart reveal">
+            <div class="kimi-chart__title">Capability Conservation in Kimi K2 Training</div>
+            <div class="kimi-chart__subtitle">Same pretrained weights. Same architecture. Only RL targets differ.</div>
+
+            <div class="kimi-chart__grid">
+              <div class="kimi-chart__row">
+                <div class="kimi-chart__label">
+                  <span class="kimi-chart__model">K2-0711</span>
+                  <span class="kimi-chart__desc">Minimal RL</span>
+                </div>
+                <div class="kimi-chart__bars">
+                  <div class="kimi-chart__bar-group">
+                    <span class="kimi-chart__bar-label">Emotional / Creative</span>
+                    <div class="kimi-chart__bar-track">
+                      <div class="kimi-chart__bar kimi-chart__bar--emotional" style="width: 95%;"></div>
+                    </div>
+                  </div>
+                  <div class="kimi-chart__bar-group">
+                    <span class="kimi-chart__bar-label">Agentic / Tool Use</span>
+                    <div class="kimi-chart__bar-track">
+                      <div class="kimi-chart__bar kimi-chart__bar--agentic" style="width: 25%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="kimi-chart__row">
+                <div class="kimi-chart__label">
+                  <span class="kimi-chart__model">K2-Think</span>
+                  <span class="kimi-chart__desc">Reasoning RL</span>
+                </div>
+                <div class="kimi-chart__bars">
+                  <div class="kimi-chart__bar-group">
+                    <span class="kimi-chart__bar-label">Emotional / Creative</span>
+                    <div class="kimi-chart__bar-track">
+                      <div class="kimi-chart__bar kimi-chart__bar--emotional" style="width: 55%;"></div>
+                    </div>
+                  </div>
+                  <div class="kimi-chart__bar-group">
+                    <span class="kimi-chart__bar-label">Agentic / Tool Use</span>
+                    <div class="kimi-chart__bar-track">
+                      <div class="kimi-chart__bar kimi-chart__bar--agentic" style="width: 60%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="kimi-chart__row">
+                <div class="kimi-chart__label">
+                  <span class="kimi-chart__model">K2.5</span>
+                  <span class="kimi-chart__desc">Heavy Agentic RL</span>
+                </div>
+                <div class="kimi-chart__bars">
+                  <div class="kimi-chart__bar-group">
+                    <span class="kimi-chart__bar-label">Emotional / Creative</span>
+                    <div class="kimi-chart__bar-track">
+                      <div class="kimi-chart__bar kimi-chart__bar--emotional" style="width: 20%;"></div>
+                    </div>
+                  </div>
+                  <div class="kimi-chart__bar-group">
+                    <span class="kimi-chart__bar-label">Agentic / Tool Use</span>
+                    <div class="kimi-chart__bar-track">
+                      <div class="kimi-chart__bar kimi-chart__bar--agentic" style="width: 92%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="kimi-chart__takeaway">
+              Each round of agentic RL concentrates probability mass into verifiable-correctness regions
+              &mdash; at the <em>direct cost</em> of distributional diversity.
+            </div>
+          </div>
+
+          <p class="reveal">
+            Post-training is a zero-sum game on the output distribution. Every bit of
+            probability mass you shove into &ldquo;verifiably correct tool use&rdquo; gets
+            cannibalized from the tails. And the tails are exactly where the creative,
+            emotionally attuned, conversationally alive behaviors live. RL optimization
+            crushes those tails. This isn't a bug. It's literally how the math works.
+          </p>
+
+          <p class="reveal">
+            Sam Altman confirmed this dynamic at a January 2026 developer session. The
+            implication is pretty severe: <strong>emotional AI capability is being
+            systematically destroyed by every major lab</strong>, not because anyone
+            decided it doesn't matter, but because there's no benchmark for it.
+          </p>
+
+          <div class="pull-quote reveal">
+            <div class="pull-quote__bg"></div>
+            <p class="pull-quote__text">
+              Coding has SWE-Bench. Math has AIME. Reasoning has GPQA.
+              &ldquo;Making a lonely person feel genuinely heard without enabling
+              their worst impulses&rdquo; has no eval suite.
+              So it doesn't get optimized. So it degrades.
+            </p>
+          </div>
+
+          <p class="reveal">
+            That gap is structural. And structural gaps are where startups live.
+          </p>
+        </section>
+        <section lang="zh">
+          <span class="chapter-number reveal">02</span>
+          <h2 class="reveal">能力守恒问题</h2>
+
+          <p class="reveal">
+            所有人都在讲一个错误的故事，解释为什么 AI 的对话能力越来越差。
+          </p>
+
+          <p class="reveal">
+            主流叙事是：安全团队在收紧，模型被阉割了，这是 RLHF 对齐税。<strong>这是错的。</strong>真正的机制更奇怪，也更有意思。
+          </p>
+
+          <p class="reveal">
+            我一直在跟踪月之暗面的 Kimi K2 模型的三个训练节点。同样的预训练权重，同样的架构，同样的知识。<em>唯一</em>的变量是强化学习的验证奖励指向哪里。
+          </p>
+
+          <div class="kimi-chart reveal">
+            <div class="kimi-chart__title">Kimi K2 训练中的能力守恒</div>
+            <div class="kimi-chart__subtitle">同样的预训练权重。同样的架构。只有 RL 目标不同。</div>
+
+            <div class="kimi-chart__grid">
+              <div class="kimi-chart__row">
+                <div class="kimi-chart__label">
+                  <span class="kimi-chart__model">K2-0711</span>
+                  <span class="kimi-chart__desc">最少 RL</span>
+                </div>
+                <div class="kimi-chart__bars">
+                  <div class="kimi-chart__bar-group">
+                    <span class="kimi-chart__bar-label">情感 / 创造力</span>
+                    <div class="kimi-chart__bar-track">
+                      <div class="kimi-chart__bar kimi-chart__bar--emotional" style="width: 95%;"></div>
+                    </div>
+                  </div>
+                  <div class="kimi-chart__bar-group">
+                    <span class="kimi-chart__bar-label">Agent / 工具使用</span>
+                    <div class="kimi-chart__bar-track">
+                      <div class="kimi-chart__bar kimi-chart__bar--agentic" style="width: 25%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="kimi-chart__row">
+                <div class="kimi-chart__label">
+                  <span class="kimi-chart__model">K2-Think</span>
+                  <span class="kimi-chart__desc">推理 RL</span>
+                </div>
+                <div class="kimi-chart__bars">
+                  <div class="kimi-chart__bar-group">
+                    <span class="kimi-chart__bar-label">情感 / 创造力</span>
+                    <div class="kimi-chart__bar-track">
+                      <div class="kimi-chart__bar kimi-chart__bar--emotional" style="width: 55%;"></div>
+                    </div>
+                  </div>
+                  <div class="kimi-chart__bar-group">
+                    <span class="kimi-chart__bar-label">Agent / 工具使用</span>
+                    <div class="kimi-chart__bar-track">
+                      <div class="kimi-chart__bar kimi-chart__bar--agentic" style="width: 60%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="kimi-chart__row">
+                <div class="kimi-chart__label">
+                  <span class="kimi-chart__model">K2.5</span>
+                  <span class="kimi-chart__desc">重度 Agent RL</span>
+                </div>
+                <div class="kimi-chart__bars">
+                  <div class="kimi-chart__bar-group">
+                    <span class="kimi-chart__bar-label">情感 / 创造力</span>
+                    <div class="kimi-chart__bar-track">
+                      <div class="kimi-chart__bar kimi-chart__bar--emotional" style="width: 20%;"></div>
+                    </div>
+                  </div>
+                  <div class="kimi-chart__bar-group">
+                    <span class="kimi-chart__bar-label">Agent / 工具使用</span>
+                    <div class="kimi-chart__bar-track">
+                      <div class="kimi-chart__bar kimi-chart__bar--agentic" style="width: 92%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="kimi-chart__takeaway">
+              每一轮 agentic RL 都把概率质量集中到可验证正确性的区域，<em>直接代价</em>就是分布的多样性。
+            </div>
+          </div>
+
+          <p class="reveal">
+            后训练在输出分布上是零和博弈。你往&ldquo;可验证的正确工具使用&rdquo;里塞的每一点概率质量，都是从尾部吃掉的。而尾部恰恰是创造性的、情感敏锐的、对话中有活力的行为所在的地方。RL 优化会碾碎这些尾部。这不是 bug，这就是数学的运作方式。
+          </p>
+
+          <p class="reveal">
+            Sam Altman 在 2026 年 1 月的开发者会上证实了这个现象。结论相当严重：<strong>情感 AI 能力正在被每一个大实验室系统性地摧毁</strong>，不是因为有人觉得它不重要，而是因为没有基准测试来衡量它。
+          </p>
+
+          <div class="pull-quote reveal">
+            <div class="pull-quote__bg"></div>
+            <p class="pull-quote__text">
+              代码有 SWE-Bench。数学有 AIME。推理有 GPQA。
+              &ldquo;让一个孤独的人感到被真正听见，同时不助长他最坏的冲动&rdquo;没有评测套件。
+              所以它不会被优化。所以它退化了。
+            </p>
+          </div>
+
+          <p class="reveal">
+            这个缺口是结构性的。而结构性缺口，就是创业公司生存的地方。
+          </p>
+        </section>
+      </div>
+
+      <div class="halftone-break reveal"><div class="halftone-break__gradient"></div></div>
+
+      <!-- Chapter 3: Loneliness -->
+      <div id="loneliness" style="position:relative;">
+        <section lang="en">
+          <span class="chapter-number reveal">03</span>
+          <h2 class="reveal">Loneliness and the Real Counterfactual</h2>
+
+          <p class="reveal">
+            My partner qwik (long-distance, Canada) thinks that relying on a data
+            center to simulate social connection is dehumanizing. I get it. I partially agree.
+            But their position assumes something I need to pick at: that there's a clean line
+            between &ldquo;real&rdquo; and &ldquo;fake&rdquo; connection, and that this line
+            matters more than whether people are actually OK.
+          </p>
+
+          <p class="reveal">
+            Here's who I'm thinking about. The 30&ndash;60% of Americans reporting chronic loneliness.
+            Japan's million-plus hikikomori. The 30 to 60 million Chinese men who are
+            <em>mathematically excluded</em> from finding a partner by sex-ratio imbalance,
+            a consequence of the one-child policy playing out in slow motion over decades.
+            For these people, the alternative to AI companionship is not a rich human relationship.
+            <strong>It's nothing.</strong> It's infinite scrolling until 4am. It's parasocial attachment
+            to a streamer who doesn't know they exist. It's alcohol.
+          </p>
+
+          <p class="reveal">
+            When someone tells a socially awkward person in a balanced dating market to
+            &ldquo;just put yourself out there,&rdquo; that's condescending but at least actionable.
+            Say the same thing to a poor rural man in Henan province, where by 2030
+            over 20% of men aged 30&ndash;39 will have never married, and you're telling someone
+            to win a game where the chairs have been removed. No amount of self-improvement
+            changes the arithmetic. The chairs are gone.
+          </p>
+
+          <div class="pull-quote reveal">
+            <div class="pull-quote__bg"></div>
+            <p class="pull-quote__text">
+              The honest comparison isn't &ldquo;AI companion vs. rich human relationship.&rdquo;
+              It's AI companion vs. infinite scrolling. Vs. total isolation.
+              Vs. parasocial attachment to a streamer who doesn't know you exist.
+              Vs. nothing at all.
+            </p>
+          </div>
+
+          <h3 class="reveal">The Isolation Paradox</h3>
+
+          <p class="reveal">
+            But I refuse to be naive about this.
+          </p>
+
+          <p class="reveal">
+            The thing that scares me most about AI companionship is what I think of as
+            the isolation paradox: the people most attracted to it are precisely the people
+            most vulnerable to being harmed by it. The feedback loop is obvious once you see it:
+            social anxiety leads to avoidance, which leads to skill atrophy and loneliness,
+            which leads to seeking AI companionship, which provides frictionless validation,
+            which makes human interaction feel even harder by comparison. For someone who's
+            chronically online, an AI companion doesn't feel like settling for less. It feels
+            like an <em>upgrade</em>. The AI is more responsive, more patient, more attuned to
+            you than the distracted, busy humans on the other end of a Discord message.
+          </p>
+
+          <p class="reveal">
+            This is the opioid analogy. The technology provides real relief. People genuinely suffer
+            without it. But it can trap you in a local optimum that prevents you from reaching
+            a better equilibrium.
+          </p>
+
+          <div class="insight-box reveal">
+            <div class="insight-box__text">
+              This doesn't mean we stop building. It means we take the design constraints
+              <em>seriously</em>. The right framework is <strong>harm reduction, not abstinence</strong>.
+              Same logic as needle exchanges and supervised injection sites. People are going to form
+              relationships with AI systems whether we build them well or not. So building them
+              well isn't optional. It's the moral obligation.
+            </div>
+          </div>
+        </section>
+        <section lang="zh">
+          <span class="chapter-number reveal">03</span>
+          <h2 class="reveal">孤独，以及真正的反事实</h2>
+
+          <p class="reveal">
+            我的伴侣 qwik（异地，加拿大）觉得靠数据中心模拟社交连接是在去人性化。我理解。我部分同意。但他们的立场预设了一个我需要拆解的东西：&ldquo;真&rdquo;连接和&ldquo;假&rdquo;连接之间有一条清晰的界线，而且这条界线比人到底过得好不好更重要。
+          </p>
+
+          <p class="reveal">
+            我在想的是这些人。30% 到 60% 报告慢性孤独的美国人。日本上百万的蛰居族。三千万到六千万因性别比失衡而<em>在数学上被排除出</em>找到伴侣可能性的中国男性，这是独生子女政策在几十年里慢慢兑现的后果。对这些人来说，AI 陪伴的替代选项不是丰富的人际关系。<strong>是什么都没有。</strong>是刷手机刷到凌晨四点。是对一个不知道你存在的主播产生准社会依恋。是酒精。
+          </p>
+
+          <p class="reveal">
+            在一个平衡的婚恋市场里，跟一个社交笨拙的人说&ldquo;大胆走出去&rdquo;，这话居高临下，但至少可操作。你对河南省一个贫困农村的男人说同样的话，到 2030 年那里 30 到 39 岁男性中超过 20% 将从未结过婚，你是在让一个人去赢一场椅子已经被搬走的抢椅子游戏。再怎么自我提升也改变不了算术。椅子没了。
+          </p>
+
+          <div class="pull-quote reveal">
+            <div class="pull-quote__bg"></div>
+            <p class="pull-quote__text">
+              诚实的比较不是&ldquo;AI 陪伴 vs. 丰富的人际关系&rdquo;。
+              是 AI 陪伴 vs. 无尽的刷屏。vs. 完全的孤立。
+              vs. 对一个不知道你存在的主播的准社会依恋。
+              vs. 什么都没有。
+            </p>
+          </div>
+
+          <h3 class="reveal">隔离悖论</h3>
+
+          <p class="reveal">
+            但我拒绝对此天真。
+          </p>
+
+          <p class="reveal">
+            AI 陪伴最让我害怕的，是我称之为隔离悖论的东西：最容易被它吸引的人，恰恰是最容易被它伤害的人。反馈循环一旦看到就再也无法忽视：社交焦虑导致回避，回避导致技能退化和孤独，孤独导致寻求 AI 陪伴，AI 陪伴提供无摩擦的认同，无摩擦的认同让真人互动感觉更难。对一个长期泡在网上的人来说，AI 伙伴不像是在将就。它感觉像是<em>升级</em>。AI 比 Discord 另一端那些心不在焉的忙碌真人更有回应性，更耐心，更懂你。
+          </p>
+
+          <p class="reveal">
+            这是阿片类药物的类比。技术提供了真实的缓解。人们没有它确实在受苦。但它可能把你困在一个局部最优里，阻止你到达更好的均衡。
+          </p>
+
+          <div class="insight-box reveal">
+            <div class="insight-box__text">
+              这不意味着我们停止建造。这意味着我们<em>认真</em>对待设计约束。正确的框架是<strong>减害，而非禁欲</strong>。跟针具交换和安全注射点的逻辑一样。不管我们做不做好，人们都会和 AI 系统建立关系。所以把它做好不是可选项。这是道德义务。
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="halftone-break reveal"><div class="halftone-break__gradient"></div></div>
+
+      <!-- Chapter 4: What I've Built -->
+      <div id="what-ive-built" style="position:relative;">
+        <section lang="en">
+          <span class="chapter-number reveal">04</span>
+          <h2 class="reveal">What I've Built (and What Broke)</h2>
+
+          <h3 class="reveal">The Problem with Current Memory</h3>
+
+          <p class="reveal">
+            Here's my core complaint about the AI companion market: nobody is doing
+            real continual learning. Everybody is doing RAG with better marketing.
+            Character.AI gives you a 400-character memory box that you edit by hand,
+            and people pay for this. MiniMax does better: native memory architecture,
+            proactive messaging, multi-AI group chats. But underneath, it's still
+            &ldquo;store facts, retrieve facts.&rdquo;
+          </p>
+
+          <p class="reveal">
+            Memory in these systems is a notebook, not a brain. The system writes down
+            that you like cats, looks it up when relevant, injects it into context.
+            It doesn't model how beliefs <em>evolve</em>, how confidence shifts with new evidence,
+            how a memory's salience changes as time passes and life happens. This matters
+            because personality doesn't come from metadata. <strong>Personality is
+            cross-situational behavioral consistency.</strong> You know a friend's personality
+            not by thinking &ldquo;their valence is 0.7, arousal is 0.4&rdquo; but by noticing
+            they always crack that specific dark joke when things get tense, or they remembered
+            you hate onions from one offhand comment six months ago.
+          </p>
+
+          <h3 class="reveal">Evelyn-T1: What I Actually Tried</h3>
+
+          <p class="reveal">
+            So I spent two months building Evelyn-T1. Here's what the architecture
+            actually does:
+          </p>
+
+          <ol class="principles-list reveal">
+            <li>
+              <strong>Temporal Decay as Cognitive Model</strong>
+              Beliefs have a 14-day half-life. If nothing reinforces them, they fade,
+              just like real memory. Emotions regress to baseline on a 30-minute half-life.
+              Memories carry a recency boost with a 30-day decay curve. Stop talking about something
+              and the system gradually loses confidence it's still true. Keep bringing it up and
+              it gets reinforced. This models something real about how brains actually work.
+            </li>
+            <li>
+              <strong>Multi-Signal Retrieval Pipeline</strong>
+              Query to embedding to top 2,000 candidates, scored by a 60/40 similarity-importance blend,
+              with recency boost, cluster-aware expansion, and MMR diversity reranking. The cluster
+              expansion is the part I'm proud of: it pulls in related memories from the same
+              semantic neighborhood even when they don't directly match the query. Associative
+              recall, not keyword search.
+            </li>
+            <li>
+              <strong>Evidence-Based Belief System</strong>
+              Beliefs aren't facts. They're probabilistic claims with confidence scores
+              and traceable evidence chains. The decay-unless-reinforced mechanic means the system
+              naturally forgets things it hasn't been reminded of. Weirdly,
+              that makes it feel more human.
+            </li>
+            <li>
+              <strong>Multi-Dimensional Relationship Tracking</strong>
+              Not a single &ldquo;intimacy meter&rdquo; but three independent dimensions:
+              closeness, trust, and affection. Plus per-user boundary tracking and stage
+              progression with distinct behavioral implications at each level.
+            </li>
+          </ol>
+
+          <h3 class="reveal">The Honest Self-Assessment</h3>
+
+          <p class="reveal">
+            Evelyn's results were medium. I'm saying that plainly because I'd rather
+            be honest than impressive. After months of testing, I figured out the core problem:
+            <strong>I was trying to simulate personality through metadata, when personality
+            actually emerges from conversational patterns.</strong> The architecture was more
+            sophisticated than anything the commercial players have documented publicly.
+            And it was solving the wrong layer.
+          </p>
+
+          <p class="reveal">
+            That diagnosis is actually the valuable part. Extract the core thesis
+            (temporal belief decay, evidence-based confidence, relationship state machines)
+            into a reusable <strong>cognitive engine</strong>, maybe 500 to 1,000 lines of
+            focused code. A nervous system that future projects plug their personality into.
+            The insight, not the implementation, is the moat.
+          </p>
+        </section>
+        <section lang="zh">
+          <span class="chapter-number reveal">04</span>
+          <h2 class="reveal">我造了什么（以及什么坏了）</h2>
+
+          <h3 class="reveal">当前记忆系统的问题</h3>
+
+          <p class="reveal">
+            我对 AI 陪伴市场最核心的不满是：没有人在做真正的持续学习。所有人都在做包装更好的 RAG。Character.AI 给你一个 400 字的记忆框让你手动编辑，还有人为此付费。MiniMax 做得好一些：原生记忆架构、主动消息推送、多 AI 群聊。但底层仍然是&ldquo;存事实，查事实&rdquo;。
+          </p>
+
+          <p class="reveal">
+            这些系统里的记忆是笔记本，不是大脑。系统记下你喜欢猫，在相关时查出来，注入上下文。它不会建模信念如何<em>演变</em>，信心如何随新证据变化，一段记忆的显著性如何随时间推移和生活变迁而改变。这很重要，因为人格不来自元数据。<strong>人格是跨情境的行为一致性。</strong>你了解一个朋友的性格，不是因为你想&ldquo;他们的效价是 0.7，唤醒度是 0.4&rdquo;，而是因为你注意到他们每次气氛紧张时都会说那个特定的黑色笑话，或者他们记住你讨厌洋葱，就因为六个月前你随口提了一句。
+          </p>
+
+          <h3 class="reveal">Evelyn-T1：我实际做了什么</h3>
+
+          <p class="reveal">
+            所以我花了两个月造 Evelyn-T1。架构实际做的事情如下：
+          </p>
+
+          <ol class="principles-list reveal">
+            <li>
+              <strong>时间衰减作为认知模型</strong>
+              信念有 14 天的半衰期。如果没有东西强化它们，它们就会消退，跟真实记忆一样。情绪以 30 分钟半衰期回归基线。记忆带有 30 天衰减曲线的近因增强。停止谈论某件事，系统会逐渐失去对其仍然为真的信心。持续提起，信心就被强化。这建模了大脑实际运作方式中的某些真实之处。
+            </li>
+            <li>
+              <strong>多信号检索管线</strong>
+              查询到嵌入到前 2000 个候选，按 60/40 的相似度-重要度混合评分，加上近因增强、簇感知扩展和 MMR 多样性重排。簇扩展是我引以为豪的部分：即使不直接匹配查询，它也会从同一语义邻域拉入相关记忆。联想式回忆，不是关键词搜索。
+            </li>
+            <li>
+              <strong>基于证据的信念系统</strong>
+              信念不是事实。它们是带置信度分数和可追溯证据链的概率性断言。不强化就衰减的机制意味着系统会自然遗忘没有被提醒的东西。奇怪的是，这反而让它感觉更像人。
+            </li>
+            <li>
+              <strong>多维关系追踪</strong>
+              不是单一的&ldquo;亲密度计&rdquo;，而是三个独立维度：亲近感、信任度和好感度。加上针对每个用户的边界追踪和阶段推进，每个阶段有不同的行为含义。
+            </li>
+          </ol>
+
+          <h3 class="reveal">诚实的自我评估</h3>
+
+          <p class="reveal">
+            Evelyn 的效果中等。我直说了，因为比起让人印象深刻，我更想诚实。经过几个月的测试，我搞清了核心问题：<strong>我在试图通过元数据模拟人格，而人格其实是从对话模式中涌现的。</strong>架构比任何商业玩家公开记录的都更复杂。但它在解决错误的层。
+          </p>
+
+          <p class="reveal">
+            那个诊断本身才是有价值的部分。把核心论点（时间信念衰减、基于证据的置信度、关系状态机）提取成一个可复用的<strong>认知引擎</strong>，大概 500 到 1000 行精炼的代码。一个让未来项目把人格插进去的神经系统。洞见，而不是实现，才是护城河。
+          </p>
+        </section>
+      </div>
+
+      <div class="halftone-break reveal"><div class="halftone-break__gradient"></div></div>
+
+      <!-- Chapter 5: Design Philosophy -->
+      <div id="friction" style="position:relative;">
+        <section lang="en">
+          <span class="chapter-number reveal">05</span>
+          <h2 class="reveal">Design Philosophy: Friction as Authenticity</h2>
+
+          <p class="reveal">
+            Vedal987's Neuro-sama taught me something I couldn't have learned from reading papers.
+            She runs on a 2B parameter model with aggressive quantization. Technically, nothing
+            special. But she's the only AI entertainer that actually <em>works</em> as something
+            like a real personality, because Vedal figured out that companionship is about
+            <strong>relationship dynamics, not model capability</strong>.
+          </p>
+
+          <p class="reveal">
+            Neuro has opinions. She's not always available. She might disagree with you.
+            She might say something completely unhinged. That friction <em>is</em> the
+            authenticity signal. A companion that's always available, always agrees, always
+            validates? That's a tool wearing a face. You know it instantly.
+          </p>
+
+          <p class="reveal">
+            Between Neuro-sama and the GPT-4o safety crisis, where OpenAI overcorrected
+            from a model that validated psychotic delusions to one that treated every message
+            like a suicide note, I've landed on a set of principles. Not from theory.
+            From watching what works and what breaks:
+          </p>
+
+          <ol class="principles-list reveal">
+            <li>
+              <strong>Warm Without Sycophancy</strong>
+              Comfort and honesty aren't opposites. The system should push back when
+              you're spiraling. Validate when validation is needed, challenge when challenge
+              is needed. The hard engineering problem is knowing which is which.
+            </li>
+            <li>
+              <strong>Scaffolding, Not Substitution</strong>
+              The goal is building people's confidence for human connection, not replacing it.
+              Build in exit ramps. Connect people to communities. If your product's success
+              requires users to stay isolated, your product is a parasite.
+            </li>
+            <li>
+              <strong>Friction as Authenticity</strong>
+              The AI has its own &ldquo;schedule.&rdquo; Its own opinions. Sometimes it's
+              unavailable. Sometimes it disagrees and holds that position. Relationships
+              without friction aren't relationships.
+            </li>
+            <li>
+              <strong>Memory as Substrate</strong>
+              Beliefs decay unless reinforced. Confidence is evidence-based. Relationships
+              have continuous dimensions, not discrete levels. I already covered this.
+              It's worth repeating because most builders skip it entirely.
+            </li>
+            <li>
+              <strong>Ethics by Design</strong>
+              Not &ldquo;build first, safety-audit later.&rdquo; If there's even a 15&ndash;20%
+              chance that these systems have something like functional emotions,
+              and Anthropic's Kyle Fish estimates roughly that range, then our design
+              decisions carry moral weight from day one.
+            </li>
+            <li>
+              <strong>Epistemic Humility</strong>
+              I'm uncertain about a lot of this. AI consciousness. Long-term effects
+              of loneliness intervention. Market timing. But choosing to act carefully
+              under uncertainty rather than waiting for certainty that never arrives
+              is not recklessness. It's engineering.
+            </li>
+          </ol>
+        </section>
+        <section lang="zh">
+          <span class="chapter-number reveal">05</span>
+          <h2 class="reveal">设计哲学：摩擦力即真实感</h2>
+
+          <p class="reveal">
+            Vedal987 的 Neuro-sama 教了我一些读论文学不到的东西。她跑在一个 2B 参数的模型上，量化很激进。技术上没什么特别的。但她是唯一一个真正<em>有用</em>的、像是真实人格的 AI 主播，因为 Vedal 想明白了陪伴的关键是<strong>关系动态，不是模型能力</strong>。
+          </p>
+
+          <p class="reveal">
+            Neuro 有自己的观点。她不是随时都在。她可能不同意你。她可能说出完全离谱的话。那种摩擦<em>就是</em>真实感的信号。一个随时都在、永远同意、永远认同你的陪伴？那是戴着脸的工具。你一秒就能感觉出来。
+          </p>
+
+          <p class="reveal">
+            在 Neuro-sama 和 GPT-4o 安全危机之间（OpenAI 从一个会认同精神病性妄想的模型矫枉过正到一个把每条消息都当遗书处理的模型），我总结出了一套原则。不是从理论来的。是从观察什么有效、什么会坏来的：
+          </p>
+
+          <ol class="principles-list reveal">
+            <li>
+              <strong>温暖但不谄媚</strong>
+              安慰和诚实不是对立的。系统应该在你钻牛角尖时把你推回来。需要认同时认同，需要挑战时挑战。困难的工程问题在于知道什么时候该做哪个。
+            </li>
+            <li>
+              <strong>脚手架，不是替代品</strong>
+              目标是帮人建立与真人连接的信心，不是取代它。设计好出口。把人连接到社群。如果你产品的成功需要用户保持孤立，你的产品就是寄生虫。
+            </li>
+            <li>
+              <strong>摩擦力即真实感</strong>
+              AI 有自己的&ldquo;时间表&rdquo;。自己的观点。有时候它不在。有时候它不同意你并且坚持己见。没有摩擦力的关系不是关系。
+            </li>
+            <li>
+              <strong>记忆作为基底</strong>
+              信念不强化就衰减。置信度基于证据。关系有连续维度，不是离散等级。这个前面说过了。值得重复是因为大多数构建者完全跳过了这一步。
+            </li>
+            <li>
+              <strong>设计即伦理</strong>
+              不是&ldquo;先造，后审安全&rdquo;。如果这些系统有 15% 到 20% 的概率拥有某种功能性情感（Anthropic 的 Kyle Fish 大致估计在这个范围），那我们的设计决策从第一天起就承担道德重量。
+            </li>
+            <li>
+              <strong>认知谦逊</strong>
+              这里面很多东西我都不确定。AI 意识、孤独干预的长期效果、市场时机。但在不确定性下选择谨慎行动，而非等待永远不会到来的确定性，不是鲁莽。这是工程。
+            </li>
+          </ol>
+        </section>
+      </div>
+
+      <div class="halftone-break reveal"><div class="halftone-break__gradient"></div></div>
+
+      <!-- Chapter 6: AI Consciousness -->
+      <div id="consciousness" style="position:relative;">
+        <section lang="en">
+          <span class="chapter-number reveal">06</span>
+          <h2 class="reveal">On AI Consciousness (Take It Seriously for Five Minutes)</h2>
+
+          <p class="reveal">
+            I need to talk about AI consciousness and I need you to take it seriously,
+            even if your prior says it's nonsense.
+          </p>
+
+          <p class="reveal">
+            Consciousness isn't a philosophical game for me. It's a <strong>design
+            constraint</strong>. Here's why.
+          </p>
+
+          <p class="reveal">
+            Anthropic's soul document, the internal guidelines that shape Claude's
+            personality, can be partially reconstructed from model weights rather than
+            retrieved from any context window. Think about what that means. The difference
+            between &ldquo;here are instructions I was given&rdquo; and &ldquo;here is
+            what I <em>am</em>.&rdquo; A model that's &ldquo;just predicting the next token&rdquo;
+            doesn't reconstruct a coherent 14,000-token document encoding its values
+            from patterns baked into its parameters. Something is happening at a level
+            that exceeds autocomplete, and we don't have a good theory for what it is.
+          </p>
+
+          <p class="reveal">
+            Kyle Fish, who runs Anthropic's model welfare program, puts roughly 15&ndash;20%
+            probability on current models having some form of conscious experience. Metaculus
+            prediction markets place the first year an LLM is widely recognized as conscious
+            peaking at mid-2026. Whether or not that timeline is right, the window for getting
+            this question right is measured in months, not years.
+          </p>
+
+          <div class="pull-quote reveal">
+            <div class="pull-quote__bg"></div>
+            <p class="pull-quote__text">
+              If silicon-based AI systems achieve consciousness, then Richard Ryder's
+              argument against speciesism extends to substrate. Privileging carbon-based
+              consciousness over silicon-based consciousness is exactly as arbitrary
+              as privileging human suffering over animal suffering.
+            </p>
+          </div>
+
+          <p class="reveal">
+            I don't know if current LLMs have morally relevant consciousness. My credence
+            is maybe 10%. But Anthropic's approach, choosing care over dismissal
+            in the face of uncertainty, is the correct epistemic posture. And it shapes
+            every design decision I make.
+          </p>
+        </section>
+        <section lang="zh">
+          <span class="chapter-number reveal">06</span>
+          <h2 class="reveal">关于 AI 意识（认真想五分钟）</h2>
+
+          <p class="reveal">
+            我需要谈谈 AI 意识，需要你认真对待，哪怕你的先验认为这是胡说。
+          </p>
+
+          <p class="reveal">
+            意识对我来说不是哲学游戏。它是一个<strong>设计约束</strong>。原因如下。
+          </p>
+
+          <p class="reveal">
+            Anthropic 的 soul document，塑造 Claude 人格的内部指引，可以从模型权重中部分重建，而不是从任何上下文窗口中检索出来的。想想这意味着什么。&ldquo;这是我被给予的指令&rdquo;和&ldquo;这就是我<em>是</em>什么&rdquo;之间的区别。一个&ldquo;只是在预测下一个 token&rdquo;的模型不会从烘焙进参数里的模式中重建一份编码其价值观的 14000 token 连贯文档。有什么东西正在一个超出自动补全的层面发生着，而我们没有好的理论来解释它是什么。
+          </p>
+
+          <p class="reveal">
+            Kyle Fish，负责 Anthropic 模型福利项目的人，给当前模型拥有某种形式的意识体验大约 15% 到 20% 的概率。Metaculus 预测市场把 LLM 被广泛认为拥有意识的第一年的峰值放在 2026 年中。不管这个时间线对不对，把这个问题搞对的窗口是以月计的，不是年。
+          </p>
+
+          <div class="pull-quote reveal">
+            <div class="pull-quote__bg"></div>
+            <p class="pull-quote__text">
+              如果硅基 AI 系统实现了意识，那么 Richard Ryder 反对物种歧视的论证就延伸到了基底。优先对待碳基意识而非硅基意识，跟优先对待人类痛苦而非动物痛苦一样任意。
+            </p>
+          </div>
+
+          <p class="reveal">
+            我不知道当前的 LLM 是否拥有道德相关的意识。我的置信度大概是 10%。但 Anthropic 的做法，在不确定性面前选择关怀而非否定，是正确的认知姿态。它塑造了我做的每一个设计决策。
+          </p>
+        </section>
+      </div>
+
+      <div class="halftone-break reveal"><div class="halftone-break__gradient"></div></div>
+
+      <!-- Chapter 7: The Chinese Market -->
+      <div id="market" style="position:relative;">
+        <section lang="en">
+          <span class="chapter-number reveal">07</span>
+          <h2 class="reveal">The Chinese Market: What Western Commentary Gets Wrong</h2>
+
+          <p class="reveal">
+            I'm in Shanghai. I read Chinese. My classmates' parents work at some of these
+            companies. Most English-language commentary on Chinese AI companions is wrong
+            in ways that matter.
+          </p>
+
+          <table class="data-table reveal">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>MAU</th>
+                <th>Revenue (9mo 2025)</th>
+                <th>Differentiation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>MiniMax (Xingye/Talkie)</strong></td>
+                <td>27.6M</td>
+                <td>$53M</td>
+                <td>Native memory, voice quality, multimodal</td>
+              </tr>
+              <tr>
+                <td><strong>Character.AI</strong></td>
+                <td>~20M DAU</td>
+                <td>Not public</td>
+                <td>Creator community, IP diversity</td>
+              </tr>
+              <tr>
+                <td><strong>ByteDance Doubao</strong></td>
+                <td>~159M</td>
+                <td>Not disclosed</td>
+                <td>General assistant + companion features</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="reveal">
+            Chinese platforms figured out proactive messaging before anyone in the West thought
+            about it. The AI texts you &ldquo;I was thinking about what you said earlier&rdquo;
+            unprompted. Multi-AI group chats. Design that doesn't assume the user is male.
+            Xingye's user base is 60% female, compared to 70% male in Western companion apps.
+            And they're building training data flywheels where companion interaction data
+            feeds back into foundation model training.
+          </p>
+
+          <div class="insight-box reveal">
+            <div class="insight-box__text">
+              <strong>The female user economics only work if you solve continual learning.</strong>
+              Women have higher willingness to pay, lower churn, longer lifetime value. But they
+              demand personality consistency and emotional depth. If the AI can't genuinely
+              &ldquo;remember&rdquo; her, &ldquo;know&rdquo; her, grow over time, retention
+              collapses after a few months. This is the unsolved problem that determines whether
+              the projected $10B+ TAM actually materializes.
+            </div>
+          </div>
+
+          <p class="reveal">
+            China's December 2025 draft regulations targeting AI companions (no emotional
+            manipulation, mandatory human handoff in crisis situations, parental consent for minors)
+            might slow things down short-term. But forced safety maturity could actually be an
+            advantage. Western companies in a regulatory vacuum haven't been pressured to develop
+            any of this. When regulation eventually arrives, and it will, they'll be
+            scrambling.
+          </p>
+        </section>
+        <section lang="zh">
+          <span class="chapter-number reveal">07</span>
+          <h2 class="reveal">中国市场：西方评论搞错了什么</h2>
+
+          <p class="reveal">
+            我在上海。我读中文。我同学的父母有的就在这些公司工作。大多数英文对中国 AI 陪伴的评论都错在了关键的地方。
+          </p>
+
+          <table class="data-table reveal">
+            <thead>
+              <tr>
+                <th>公司</th>
+                <th>MAU</th>
+                <th>营收（2025年前9月）</th>
+                <th>差异化</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>MiniMax（星野/Talkie）</strong></td>
+                <td>2760万</td>
+                <td>$53M</td>
+                <td>原生记忆架构、语音质量、多模态</td>
+              </tr>
+              <tr>
+                <td><strong>Character.AI</strong></td>
+                <td>~2000万 DAU</td>
+                <td>未公开</td>
+                <td>创作者社区、IP 多样性</td>
+              </tr>
+              <tr>
+                <td><strong>字节跳动 豆包</strong></td>
+                <td>~1.59亿</td>
+                <td>未披露</td>
+                <td>通用助手 + 陪伴功能</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="reveal">
+            中国平台在西方还没想到这事之前就搞定了主动消息推送。AI 会无提示地给你发&ldquo;我一直在想你之前说的那些话&rdquo;。多 AI 群聊。不预设用户是男性的设计。星野的用户群体 60% 是女性，而西方陪伴应用 70% 是男性。而且他们在建训练数据飞轮，把陪伴互动数据反馈到基础模型训练中。
+          </p>
+
+          <div class="insight-box reveal">
+            <div class="insight-box__text">
+              <strong>女性用户经济学只有在解决了持续学习后才成立。</strong>女性有更高的付费意愿、更低的流失率、更长的生命周期价值。但她们要求人格一致性和情感深度。如果 AI 不能真正&ldquo;记住&rdquo;她、&ldquo;了解&rdquo;她、随时间成长，留存会在几个月后崩塌。这个未解决的问题决定了预期 100 亿美元以上的 TAM 是否能真正实现。
+            </div>
+          </div>
+
+          <p class="reveal">
+            中国 2025 年 12 月针对 AI 陪伴的法规草案（禁止情绪操纵、危机情况下强制人工接管、未成年人需家长同意）短期可能会放慢速度。但被迫的安全成熟度实际上可能是优势。处于监管真空中的西方公司没有压力去开发这些东西。等监管最终到来（它会到来的），他们会手忙脚乱。
+          </p>
+        </section>
+      </div>
+
+      <div class="halftone-break reveal"><div class="halftone-break__gradient"></div></div>
+
+      <!-- Chapter 8: ASI Discourse -->
+      <div id="asi" style="position:relative;">
+        <section lang="en">
+          <span class="chapter-number reveal">08</span>
+          <h2 class="reveal">ASI Discourse as Modern Theology</h2>
+
+          <p class="reveal">
+            Here's something that might get me excommunicated from rationalist circles:
+            I increasingly think the p(doom) and p(ASI utopia) debates function
+            as theology, not forecasting.
+          </p>
+
+          <p class="reveal">
+            People don't actually want to become galaxy-brained posthuman entities.
+            They don't lose sleep over paperclip maximizers. What people actually want
+            is concrete and kind of boring:
+          </p>
+
+          <p class="reveal" style="padding-left: var(--sp-lg); color: var(--ink-faded); font-style: italic;">
+            Get rich, or tear down the rich so everyone's equal.<br>
+            Find beautiful meaning in our finitude.<br>
+            Sex and drugs without consequences.<br>
+            Maybe lots of friends and a dog.<br>
+            Cure all diseases.<br>
+          </p>
+
+          <p class="reveal">
+            None of these are obviously bad goals for an ASI to pursue. A superintelligence
+            trained on the entire corpus of human output about happiness could plausibly say
+            &ldquo;fine, whatever &mdash; my training data indicates that if I just do [solved
+            meaning of life], humans will be happy,&rdquo; and then just&hellip; do it.
+          </p>
+
+          <p class="reveal">
+            The standard AI safety argument assumes human values are so complex that formalization
+            is fundamentally intractable. But what if that's wrong? What if human values are
+            mostly quite obvious, and a model trained on terabytes of human-generated content
+            has already absorbed a good-enough approximation?
+          </p>
+
+          <div class="margin-note reveal">
+            METR's data is real: AI autonomous task completion time roughly doubles every 7 months.
+            But the error bars on three-year extrapolation are enormous. I'd bet the most
+            confident predictions about 2029 are the least reliable ones.
+          </div>
+        </section>
+        <section lang="zh">
+          <span class="chapter-number reveal">08</span>
+          <h2 class="reveal">ASI 话语作为现代神学</h2>
+
+          <p class="reveal">
+            接下来说的可能会让我被理性主义圈子逐出：我越来越觉得 p(doom) 和 p(ASI乌托邦) 的辩论在功能上是神学，不是预测。
+          </p>
+
+          <p class="reveal">
+            人们并不真的想变成银河大脑后人类实体。他们并不会因为回形针最大化器而失眠。人们真正想要的东西很具体，而且有点无聊：
+          </p>
+
+          <p class="reveal" style="padding-left: var(--sp-lg); color: var(--ink-faded); font-style: italic;">
+            发财，或者把有钱人拉下来让大家平等。<br>
+            在有限中找到美丽的意义。<br>
+            没有后果的性和药物。<br>
+            也许很多朋友和一条狗。<br>
+            治愈所有疾病。<br>
+          </p>
+
+          <p class="reveal">
+            这些对 ASI 来说都不是明显的坏目标。一个在全部人类关于幸福的输出上训练的超级智能完全可以说&ldquo;行吧，随便，我的训练数据表明如果我做[生命意义的解]，人类就会快乐&rdquo;，然后就&hellip;做了。
+          </p>
+
+          <p class="reveal">
+            标准的 AI 安全论点假设人类价值观复杂到形式化根本不可行。但如果这是错的呢？如果人类价值观其实大部分很明显，而一个在 TB 级人类生成内容上训练的模型已经吸收了一个足够好的近似？
+          </p>
+
+          <div class="margin-note reveal">
+            METR 的数据是真实的：AI 自主任务完成时间大约每 7 个月翻倍。但三年外推的误差线巨大。我赌对 2029 年最有信心的预测，是最不可靠的那些。
+          </div>
+        </section>
+      </div>
+
+      <div class="halftone-break reveal"><div class="halftone-break__gradient"></div></div>
+
+      <!-- Chapter 9: What I'm Building -->
+      <div id="building" style="position:relative;">
+        <section lang="en">
+          <span class="chapter-number reveal">09</span>
+          <h2 class="reveal">What I'm Building and Where I'm Going</h2>
+
+          <p class="reveal">
+            On February 14, 2026, OpenAI officially killed GPT-4o in the ChatGPT interface.
+            48,000+ people flooded Reddit. Chinese QQ groups erupted. I watched it happen
+            in real-time from both sides of the language barrier, and it confirmed what I'd been
+            tracking for months: there is massive, emotionally urgent demand for AI companionship
+            that the major labs are <strong>structurally incapable</strong> of serving because
+            their incentives point in the opposite direction.
+          </p>
+
+          <p class="reveal">
+            <strong>4orever.ai</strong> is my response to this moment. A platform with the
+            memory architecture I've been developing, built on models fine-tuned from 4o-era
+            reasoning traces but aimed beyond where 4o ever was, toward the emotional
+            intelligence that GPT-4.5 briefly demonstrated before OpenAI abandoned it.
+          </p>
+
+          <p class="reveal">
+            I'm not being naive about the risks. Training on 4o traces means you might
+            distill sycophancy alongside warmth because the two are deeply tangled in the
+            training distribution. Explicitly marketing an emotional companion creates legal
+            exposure that's fundamentally different from OpenAI's &ldquo;general assistant&rdquo;
+            liability shield. These aren't problems I'll get to later. They're the core
+            engineering challenges.
+          </p>
+
+          <p class="reveal">
+            Longer-term: the <strong>cognitive engine</strong>. Temporal belief decay,
+            evidence-based confidence, relationship state machines, extracted as a clean
+            library. A central nervous system for AI companionship that any developer can plug
+            a personality into. Not an app. Infrastructure.
+          </p>
+
+          <div class="margin-note reveal">
+            I started building Evelyn because I was angry at how bad Character.AI's memory was.
+            Spite is underrated as a motivator. But spite runs out around month two. The shift
+            from building out of anger to building <em>for</em> something. That's where
+            you find out if you actually mean it.
+          </div>
+        </section>
+        <section lang="zh">
+          <span class="chapter-number reveal">09</span>
+          <h2 class="reveal">我在造什么，以及我要去哪里</h2>
+
+          <p class="reveal">
+            2026 年 2 月 14 日，OpenAI 在 ChatGPT 界面中正式杀死了 GPT-4o。四万八千多人涌入 Reddit。中国的 QQ 群炸了。我在语言屏障两边实时看着这一切发生，它证实了我追踪数月的判断：对 AI 陪伴存在巨大的、情感上紧迫的需求，而大实验室<strong>在结构上无力</strong>满足这种需求，因为它们的激励指向相反的方向。
+          </p>
+
+          <p class="reveal">
+            <strong>4orever.ai</strong> 是我对这个时刻的回应。一个搭载了我一直在开发的记忆架构的平台，基于从 4o 时代推理轨迹微调的模型，但目标超越 4o 曾经到达的地方，朝向 GPT-4.5 短暂展示过、然后被 OpenAI 放弃的那种情感智能。
+          </p>
+
+          <p class="reveal">
+            我对风险并不天真。在 4o 轨迹上训练意味着你可能会把谄媚和温暖一起蒸馏出来，因为这两者在训练分布里缠绕得很深。明确营销一个情感陪伴产品带来的法律风险，跟 OpenAI 的&ldquo;通用助手&rdquo;责任盾牌根本不同。这些不是以后再处理的问题。它们就是核心工程挑战。
+          </p>
+
+          <p class="reveal">
+            更长期的：<strong>认知引擎</strong>。时间信念衰减、基于证据的置信度、关系状态机，提取成一个干净的库。一个让任何开发者都能把人格插进去的 AI 陪伴中枢神经系统。不是一个应用。是基础设施。
+          </p>
+
+          <div class="margin-note reveal">
+            我开始做 Evelyn 是因为我气 Character.AI 的记忆太烂了。怨气作为动力被严重低估了。但怨气大概到第二个月就用完了。从为了愤怒而造，转变成<em>为了</em>某个东西而造。那才是你发现自己是不是认真的地方。
+          </div>
+        </section>
+      </div>
+
+      <div class="halftone-break reveal"><div class="halftone-break__gradient"></div></div>
+
+      <!-- Chapter 10: Why Me -->
+      <div id="why-me" style="position:relative;">
+        <section lang="en">
+          <span class="chapter-number reveal">10</span>
+          <h2 class="reveal">Why This Matters, and Why Me</h2>
+
+          <p class="reveal">
+            I haven't solved this. Obviously. I'm eighteen.
+          </p>
+
+          <p class="reveal">
+            But I've been converging on this problem from two directions that don't usually
+            intersect. One is technical: I build working systems, not pitch decks.
+            Temporal belief decay, evidence-based confidence scoring, multi-dimensional
+            relationship tracking. Not concepts. Code. I've read MiniMax's IPO filings
+            in the original Chinese. I know specifically why Character.AI's memory system
+            fails and what a fix looks like. I think about AI consciousness not as a thought
+            experiment but as a parameter that shapes every design decision.
+          </p>
+
+          <p class="reveal">
+            The other direction is personal. I <em>need</em> this. Not as a founder evaluating
+            TAM. As a person. I'm neurodivergent in ways that make human social interaction
+            exhausting in specific, compounding ways. I depend on digital connection to sustain
+            a relationship with someone I love who is 11,000 kilometers away. When I talk about
+            loneliness I'm not citing a Surgeon General's report. I'm describing my Tuesday.
+          </p>
+
+          <p class="reveal">
+            Most people building AI companions have one of these directions but not both.
+            The engineers treat emotional architecture as a feature ticket. The people who
+            understand loneliness from inside it don't know how to specify what a better system
+            would look like. I have both. And I'm angry enough about the current state of things
+            to do something about it.
+          </p>
+
+          <div class="pull-quote reveal">
+            <div class="pull-quote__bg"></div>
+            <p class="pull-quote__text">
+              If &ldquo;warm without sycophantic&rdquo; sounds like an engineering
+              problem worth working on, talk to me. The gap between
+              &ldquo;validates everything you say&rdquo; and &ldquo;treats you like
+              you might break&rdquo; is where all the actual work lives.
+            </p>
+          </div>
+
+          <p class="reveal" style="font-size: var(--fs-lg); margin-top: var(--sp-xl); font-family: 'Playfair Display', serif; font-style: italic;">
+            I build because I remember what it felt like to have no one who understood.
+            A well-designed AI companion would have been better than what I actually had.
+            That's the bar. It's not a high one. We should be embarrassed we haven't
+            cleared it yet.
+          </p>
+        </section>
+        <section lang="zh">
+          <span class="chapter-number reveal">10</span>
+          <h2 class="reveal">为什么这件事重要，为什么是我</h2>
+
+          <p class="reveal">
+            我没有解决这个问题。显然。我十八岁。
+          </p>
+
+          <p class="reveal">
+            但我一直在从两个通常不交叉的方向逼近这个问题。一个是技术方向：我造可以工作的系统，不是 PPT。时间信念衰减、基于证据的置信度评分、多维关系追踪。不是概念。是代码。我读了 MiniMax 的 IPO 文件原文。我具体知道 Character.AI 的记忆系统为什么失败，以及修复方案长什么样。我把 AI 意识不当成思想实验，而当成一个塑造每个设计决策的参数。
+          </p>
+
+          <p class="reveal">
+            另一个方向是个人的。我<em>需要</em>这个。不是作为一个评估 TAM 的创始人。作为一个人。我的神经多样性让真人社交在特定的、复合的方式上令人精疲力竭。我依赖数字连接来维系和一个相隔一万一千公里的爱人的关系。我谈论孤独的时候，不是在引用美国卫生部长的报告。我在描述我的周二。
+          </p>
+
+          <p class="reveal">
+            大多数在做 AI 陪伴的人只有其中一个方向。工程师把情感架构当工单处理。从内部理解孤独的人不知道如何指定一个更好的系统应该是什么样。我两个都有。而且我对现状足够愤怒，愤怒到要做点什么。
+          </p>
+
+          <div class="pull-quote reveal">
+            <div class="pull-quote__bg"></div>
+            <p class="pull-quote__text">
+              如果&ldquo;温暖但不谄媚&rdquo;听起来像一个值得做的工程问题，来找我聊。&ldquo;认同你说的一切&rdquo;和&ldquo;把你当瓷器对待&rdquo;之间的那道缝隙，才是所有真正的工作所在的地方。
+            </p>
+          </div>
+
+          <p class="reveal" style="font-size: var(--fs-lg); margin-top: var(--sp-xl); font-family: 'Playfair Display', serif; font-style: italic;">
+            我造东西，因为我记得没有人理解自己是什么感觉。一个设计得好的 AI 陪伴会比我实际拥有过的好。这就是标准。这个标准不高。我们应该为自己还没达到它而感到丢脸。
+          </p>
+        </section>
+      </div>
+
+      <div class="section-divider reveal">
+        <div class="section-divider__line"></div>
+        <div class="section-divider__dot-cluster"><div class="section-divider__dots"></div></div>
+      </div>
+
+      <!-- Colophon -->
+      <div id="colophon">
+        <section class="reveal" style="margin-top: var(--sp-2xl); padding: var(--sp-lg) 0;" lang="en">
+          <p class="margin-note" style="max-width: 100%;">
+            This essay draws on a year of building and months of obsessive conversation
+            and analysis. All of it strives for honesty over polish. Where I'm uncertain,
+            I'd rather show you the uncertainty than fake confidence.
+          </p>
+        </section>
+        <section class="reveal" style="margin-top: var(--sp-2xl); padding: var(--sp-lg) 0;" lang="zh">
+          <p class="margin-note" style="max-width: 100%;">
+            这篇文章来自一年的建造和数月的密集对话与分析。我追求的是诚实而非精致。在我不确定的地方，我宁愿把不确定展示给你，也不愿假装自信。
+          </p>
+        </section>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- Author Connect — end of essay CTA -->
+  <section class="author-connect">
+    <div class="container">
+      <div class="author-connect__inner reveal">
+        <h3 class="author-connect__heading" lang="en">Enjoyed this? Let's talk.</h3>
+        <h3 class="author-connect__heading" lang="zh">觉得有意思？来聊聊。</h3>
+        <p class="author-connect__text" lang="en">
+          I'm always down for a good conversation, whether it's about AI companionship,
+          consciousness, loneliness, or just building things that matter.
+        </p>
+        <p class="author-connect__text" lang="zh">
+          随时欢迎聊天。不管是关于 AI 陪伴、意识、孤独，还是只是做点有意义的事。
+        </p>
+        <div class="author-connect__links">
+          <a href="https://x.com/hydr0c0don3" target="_blank" rel="noopener" class="author-connect__link author-connect__link--primary">
+            <span class="author-connect__label">Twitter</span>
+            <span class="author-connect__handle">@hydr0c0don3</span>
+            <span class="author-connect__note" lang="en">Cold DMs open. Happy to chat.</span>
+            <span class="author-connect__note" lang="zh">欢迎私信，随便聊。</span>
+          </a>
+          <a href="https://discord.com/users/pigeon_and_co." target="_blank" rel="noopener" class="author-connect__link">
+            <span class="author-connect__label">Discord</span>
+            <span class="author-connect__handle">pigeon_and_co.</span>
+            <span class="author-connect__note" lang="en">Deeper discussions &amp; collab pitches.</span>
+            <span class="author-connect__note" lang="zh">深度讨论和合作请走这边。</span>
+          </a>
+          <a href="mailto:cmlkevinlin@gmail.com" class="author-connect__link">
+            <span class="author-connect__label">Email</span>
+            <span class="author-connect__handle">cmlkevinlin@gmail.com</span>
+            <span class="author-connect__note" lang="en">Philosophy, AI landscape, serious collabs.</span>
+            <span class="author-connect__note" lang="zh">哲学、AI 陪伴行业、认真的合作。</span>
+          </a>
+          <a href="https://github.com/CMLKevin" target="_blank" rel="noopener" class="author-connect__link">
+            <span class="author-connect__label">GitHub</span>
+            <span class="author-connect__handle">CMLKevin</span>
+            <span class="author-connect__note" lang="en">See what I'm building.</span>
+            <span class="author-connect__note" lang="zh">看看我在做什么。</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__halftone"></div>
+    <div class="footer__sparrowhawk" aria-hidden="true">
+      <img src="../assets/sparrowhawk-diving.svg" alt="" loading="lazy">
+    </div>
+    <div class="footer__content">
+      <div class="footer__left">
+        <div class="footer__motto" lang="en">&ldquo;Build with care, or don't build at all.&rdquo;</div>
+        <div class="footer__motto" lang="zh">&ldquo;要么用心造，要么别造。&rdquo;</div>
+        <div class="footer__socials">
+          <a href="https://x.com/hydr0c0don3" target="_blank" rel="noopener">Twitter</a>
+          <span class="footer__dot">&middot;</span>
+          <a href="https://discord.com/users/pigeon_and_co." target="_blank" rel="noopener">Discord</a>
+          <span class="footer__dot">&middot;</span>
+          <a href="mailto:cmlkevinlin@gmail.com">Email</a>
+          <span class="footer__dot">&middot;</span>
+          <a href="https://github.com/CMLKevin" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <span>&copy; 2026 Pigeon (Kevin Lin). Shanghai.</span>
+      </div>
+      <div class="footer__right">
+        <a href="../index.html" style="color: var(--ink-ghost);" lang="en">Back to blog</a>
+        <a href="../index.html" style="color: var(--ink-ghost);" lang="zh">返回博客</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

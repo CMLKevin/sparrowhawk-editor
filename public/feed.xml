@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sparrowhawk</title>
+    <link>https://sparrowhawk.dev/</link>
+    <description>Thoughts on AI emotional companionship, consciousness, loneliness, and building systems that care. By Pigeon (Kevin Lin).</description>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 15 Feb 2026 00:00:00 +0800</lastBuildDate>
+    <atom:link href="https://sparrowhawk.dev/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>AI, Myself, Emotions, and the World</title>
+      <link>https://sparrowhawk.dev/essays/ai-myself-emotions-and-the-world.html</link>
+      <guid isPermaLink="true">https://sparrowhawk.dev/essays/ai-myself-emotions-and-the-world.html</guid>
+      <pubDate>Sun, 01 Feb 2026 00:00:00 +0800</pubDate>
+      <description>On the future of AI emotional companionship — the capability conservation problem, the loneliness epidemic, cognitive architectures, and why building well is a moral imperative. By Pigeon (Kevin Lin).</description>
+      <category>AI Companionship</category>
+      <category>Emotional AI</category>
+      <category>Loneliness</category>
+      <category>AI Consciousness</category>
+    </item>
+  </channel>
+</rss>

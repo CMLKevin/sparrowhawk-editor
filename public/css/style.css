@@ -1,0 +1,2073 @@
+/* ============================================
+   PIGEON'S BLOG — "Ink & Paper" Halftone Design
+   BOLD EDITION: Dramatic halftone gradients,
+   tight spacing, artsy opinionated aesthetic.
+   ============================================ */
+
+/* --- CSS Custom Properties --- */
+:root {
+  /* Paper & Ink */
+  --paper: #F2EDE4;
+  --paper-warm: #EDE7DB;
+  --paper-cool: #E8E4DD;
+  --ink: #1A1A2E;
+  --ink-light: #2D2D44;
+  --ink-faded: #6B6B80;
+  --ink-ghost: #A0A0B0;
+
+  /* Accent palette — richer, bolder */
+  --vermillion: #D63230;
+  --vermillion-dark: #B5282A;
+  --vermillion-glow: rgba(214, 50, 48, 0.15);
+  --indigo: #2D3A8C;
+  --indigo-light: #4A5ABF;
+  --indigo-glow: rgba(45, 58, 140, 0.12);
+  --amber: #E09F3E;
+  --amber-muted: #C4893A;
+  --teal: #3A7D7E;
+  --teal-glow: rgba(58, 125, 126, 0.10);
+  --rose: #C45B84;
+  --rose-glow: rgba(196, 91, 132, 0.12);
+
+  /* Halftone dot sizes — bigger, bolder */
+  --dot-sm: 1.5px;
+  --dot-md: 2.5px;
+  --dot-lg: 5px;
+  --dot-xl: 8px;
+  --dot-xxl: 12px;
+
+  /* Typography scale (modular, ratio ~1.333) */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1.05rem;
+  --fs-md: 1.2rem;
+  --fs-lg: 1.6rem;
+  --fs-xl: 2.15rem;
+  --fs-2xl: 2.85rem;
+  --fs-3xl: 3.8rem;
+  --fs-4xl: 5rem;
+  --fs-hero: clamp(3.5rem, 8vw, 7rem);
+
+  /* Spacing — TIGHTER throughout */
+  --sp-xs: 0.5rem;
+  --sp-sm: 1rem;
+  --sp-md: 1.5rem;
+  --sp-lg: 2rem;
+  --sp-xl: 3rem;
+  --sp-2xl: 4.5rem;
+  --sp-3xl: 6rem;
+
+  /* Layout */
+  --content-width: 720px;
+  --wide-width: 960px;
+  --full-width: 1200px;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* CJK fonts */
+  --font-serif-zh: 'Noto Serif SC', 'Source Han Serif SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', serif;
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Newsreader', 'Georgia', serif;
+  font-size: var(--fs-base);
+  line-height: 1.75;
+  color: var(--ink);
+  background-color: var(--paper);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Paper grain texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+::selection {
+  background: var(--vermillion);
+  color: var(--paper);
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+h1 { font-size: var(--fs-3xl); }
+h2 { font-size: var(--fs-2xl); margin-bottom: var(--sp-md); }
+h3 { font-size: var(--fs-xl); margin-bottom: var(--sp-sm); }
+h4 { font-size: var(--fs-lg); }
+
+p {
+  margin-bottom: var(--sp-md);
+  max-width: 65ch;
+}
+
+a {
+  color: var(--vermillion);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s var(--ease-out);
+}
+
+a:hover {
+  border-bottom-color: var(--vermillion);
+}
+
+em {
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+}
+
+strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+blockquote {
+  position: relative;
+  margin: var(--sp-xl) 0;
+  padding: var(--sp-lg) var(--sp-lg) var(--sp-lg) var(--sp-xl);
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-lg);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--ink-light);
+  border-left: none;
+}
+
+blockquote::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--vermillion), var(--indigo));
+}
+
+blockquote::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, var(--vermillion) var(--dot-md), transparent var(--dot-md));
+  background-size: 8px 8px;
+  opacity: 0.15;
+  z-index: -1;
+}
+
+code, .mono {
+  font-family: 'JetBrains Mono', 'Menlo', monospace;
+  font-size: 0.9em;
+}
+
+/* ====================================================
+   HALFTONE PATTERN SYSTEM — Bold, Gradient, Artistic
+   ==================================================== */
+
+/* Small dots — subtle texture */
+.halftone-sm {
+  background-image: radial-gradient(circle, var(--ink) var(--dot-sm), transparent var(--dot-sm));
+  background-size: 5px 5px;
+}
+
+/* Medium dots — visible pattern */
+.halftone-md {
+  background-image: radial-gradient(circle, var(--ink) var(--dot-md), transparent var(--dot-md));
+  background-size: 10px 10px;
+}
+
+/* Large dots — bold statement */
+.halftone-lg {
+  background-image: radial-gradient(circle, var(--ink) var(--dot-lg), transparent var(--dot-lg));
+  background-size: 14px 14px;
+}
+
+/* Vermillion halftone */
+.halftone-accent {
+  background-image: radial-gradient(circle, var(--vermillion) var(--dot-md), transparent var(--dot-md));
+  background-size: 10px 10px;
+}
+
+/* Diagonal halftone */
+.halftone-diagonal {
+  background-image: radial-gradient(circle, var(--ink) var(--dot-sm), transparent var(--dot-sm));
+  background-size: 7px 7px;
+  transform: rotate(45deg);
+}
+
+/* Gradient halftone — dots that fade */
+.halftone-gradient {
+  position: relative;
+}
+
+.halftone-gradient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--ink) var(--dot-md), transparent var(--dot-md));
+  background-size: 10px 10px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+  pointer-events: none;
+}
+
+/* SVG Halftone Filter (for images) */
+.halftone-filter {
+  filter: url(#halftone-filter);
+}
+
+/* --- Layout Components --- */
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-md);
+}
+
+.container--wide {
+  max-width: var(--wide-width);
+}
+
+.container--full {
+  max-width: var(--full-width);
+}
+
+/* --- Navigation --- */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: var(--sp-sm) var(--sp-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--paper);
+  transition: all 0.4s var(--ease-out);
+}
+
+.nav--scrolled {
+  background: rgba(242, 237, 228, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(26, 26, 46, 0.08);
+}
+
+.nav__logo {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: none;
+  letter-spacing: -0.03em;
+}
+
+.nav__logo span {
+  color: var(--vermillion);
+}
+
+.nav__links {
+  display: flex;
+  gap: var(--sp-md);
+  list-style: none;
+}
+
+.nav__links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-faded);
+  border-bottom: none;
+  transition: color 0.3s var(--ease-out);
+}
+
+.nav__links a:hover {
+  color: var(--vermillion);
+}
+
+/* --- Reading Progress Bar --- */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--vermillion), var(--indigo), var(--teal));
+  z-index: 1001;
+  transition: width 0.15s linear;
+  will-change: width;
+}
+
+/* ====================================================
+   HERO SECTION — Tighter, bolder, artsy
+   ==================================================== */
+.hero {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--sp-3xl) var(--sp-md) var(--sp-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---- TRUE HALFTONE with gradient-mapped dot sizing ---- */
+/* Uses filter: contrast() + background-blend-mode: multiply
+   so dots ACTUALLY vary in size based on the gradient map.
+   This is the authentic print-halftone technique. */
+
+.hero__halftone-bg {
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 55vw;
+  height: 120%;
+  pointer-events: none;
+  z-index: 0;
+  /* TRUE HALFTONE: dot pattern + gradient map + blend + contrast */
+  background:
+    radial-gradient(closest-side, #777, #fff) 0 / 14px 14px space,
+    linear-gradient(135deg, #999 0%, #fff 60%, #eee 100%);
+  background-blend-mode: multiply;
+  filter: contrast(12);
+  mix-blend-mode: multiply;
+  opacity: 0.12;
+  transform: rotate(-8deg);
+}
+
+/* Second halftone layer — vermillion tinted, different angle */
+.hero__halftone-accent {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  width: 45vw;
+  height: 80%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(closest-side, #888, #fff) 4px 4px / 18px 18px space,
+    radial-gradient(ellipse at 30% 70%, #aaa, #fff 70%);
+  background-blend-mode: multiply;
+  filter: contrast(16);
+  opacity: 0.08;
+  transform: rotate(12deg);
+}
+
+/* Vermillion color wash over halftone */
+.hero__halftone-accent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, var(--vermillion) 0%, transparent 70%);
+  mix-blend-mode: color;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Bottom-left accent blob — indigo halftone circle */
+.hero__halftone-accent::after {
+  content: '';
+  position: absolute;
+  bottom: -40%;
+  left: -60%;
+  width: 400px;
+  height: 400px;
+  background:
+    radial-gradient(closest-side, #888, #fff) 0 / 10px 10px space,
+    radial-gradient(circle at center, #aaa, #fff 60%);
+  background-blend-mode: multiply;
+  filter: contrast(20);
+  border-radius: 50%;
+  opacity: 0.15;
+  animation: dotPulse 5s ease-in-out infinite;
+}
+
+/* Gradient mesh behind the halftone for color warmth */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 65%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at 70% 25%, rgba(214, 50, 48, 0.10) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 65%, rgba(45, 58, 140, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 30% 80%, rgba(58, 125, 126, 0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(196, 91, 132, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--vermillion);
+  margin-bottom: var(--sp-sm);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-out) 0.3s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+.hero__title {
+  font-size: var(--fs-hero);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: var(--sp-lg);
+  max-width: 900px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s var(--ease-out) 0.5s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+.hero__title .highlight {
+  color: var(--vermillion);
+  position: relative;
+  display: inline-block;
+}
+
+.hero__title .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0.05em;
+  left: -0.05em;
+  right: -0.05em;
+  height: 0.35em;
+  background: linear-gradient(90deg, var(--vermillion), var(--rose));
+  opacity: 0.15;
+  z-index: -1;
+}
+
+.hero__extended {
+  display: block;
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink-faded);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-top: 0.2em;
+}
+
+.hero__extended em {
+  color: var(--vermillion);
+  font-style: italic;
+  position: relative;
+}
+
+.hero__extended em::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -0.05em;
+  right: -0.05em;
+  height: 0.25em;
+  background: linear-gradient(90deg, var(--vermillion-glow), var(--rose-glow));
+  z-index: -1;
+}
+
+.hero__subtitle {
+  font-size: var(--fs-lg);
+  color: var(--ink-faded);
+  max-width: 500px;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-out) 0.7s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+/* ====================================================
+   SPARROWHAWK DECORATIVE ELEMENTS
+   Soaring, diving, and perched silhouettes with
+   halftone/bitmap treatment — editorial accents
+   ==================================================== */
+
+/* Hero sparrowhawk — large soaring silhouette, ghost watermark */
+.hero__sparrowhawk {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  width: clamp(220px, 28vw, 420px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  animation: sparrowhawkGlide 2s var(--ease-out) 0.8s forwards;
+}
+
+.hero__sparrowhawk img {
+  width: 100%;
+  height: auto;
+}
+
+/* Post hero sparrowhawk — diving silhouette accent */
+.post-hero__sparrowhawk {
+  position: absolute;
+  top: 8%;
+  right: 10%;
+  width: clamp(80px, 10vw, 150px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  animation: sparrowhawkDive 1.5s var(--ease-out) 0.6s forwards;
+}
+
+.post-hero__sparrowhawk img {
+  width: 100%;
+  height: auto;
+}
+
+/* About section sparrowhawk — perched, right side */
+.about-sparrowhawk {
+  position: absolute;
+  bottom: 12%;
+  right: 6%;
+  width: clamp(80px, 10vw, 140px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.06;
+}
+
+.about-sparrowhawk img {
+  width: 100%;
+  height: auto;
+}
+
+/* Footer sparrowhawk — diving, left side */
+.footer__sparrowhawk {
+  position: absolute;
+  top: 20%;
+  left: 6%;
+  width: clamp(50px, 6vw, 90px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.07;
+}
+
+.footer__sparrowhawk img {
+  width: 100%;
+  height: auto;
+  transform: scaleX(-1);
+}
+
+/* Sparrowhawk animations — end at ghost opacity */
+@keyframes sparrowhawkGlide {
+  from {
+    opacity: 0;
+    transform: translateX(30px) translateY(-15px);
+  }
+  to {
+    opacity: 0.07;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes sparrowhawkDive {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) rotate(-5deg);
+  }
+  to {
+    opacity: 0.06;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+/* Hero social links — compact inline row */
+.hero__socials {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-top: var(--sp-md);
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeUp 0.8s var(--ease-out) 0.9s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+.hero__socials a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  color: var(--ink-faded);
+  text-decoration: none;
+  border-bottom: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.3s var(--ease-out);
+}
+
+.hero__socials a:hover {
+  color: var(--vermillion);
+}
+
+.hero__socials span {
+  color: var(--ink-ghost);
+  opacity: 0.4;
+  font-size: var(--fs-xs);
+}
+
+/* ====================================================
+   POST CARD (Home page)
+   ==================================================== */
+.posts-section {
+  padding: var(--sp-xl) 0 var(--sp-lg);
+  position: relative;
+}
+
+/* Gradient halftone band across the posts section */
+.posts-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at 0% 0%, var(--rose-glow) 0%, transparent 35%),
+    radial-gradient(ellipse at 100% 100%, var(--indigo-glow) 0%, transparent 35%);
+  pointer-events: none;
+}
+
+.posts-section__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--ink);
+  opacity: 0.1;
+  margin-bottom: var(--sp-xl);
+  position: relative;
+}
+
+.posts-section__divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -30px;
+  width: 100%;
+  height: 60px;
+  background:
+    radial-gradient(closest-side, #888, #fff) 0 / 8px 8px space,
+    linear-gradient(to bottom, #fff, #bbb 50%, #fff);
+  background-blend-mode: multiply;
+  filter: contrast(14);
+  mix-blend-mode: multiply;
+  opacity: 0.08;
+}
+
+.posts-section__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-ghost);
+  margin-bottom: var(--sp-lg);
+}
+
+.post-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-md);
+  padding: var(--sp-lg) 0;
+  border-bottom: 1px solid rgba(26, 26, 46, 0.08);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.4s var(--ease-out);
+  position: relative;
+}
+
+.post-card:hover {
+  border-bottom-color: transparent;
+}
+
+.post-card::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--vermillion), var(--indigo));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.post-card:hover::after {
+  transform: scaleX(1);
+}
+
+.post-card__number {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-4xl);
+  color: var(--ink);
+  opacity: 0.06;
+  line-height: 1;
+  position: absolute;
+  top: var(--sp-sm);
+  right: 0;
+  pointer-events: none;
+}
+
+.post-card__meta {
+  display: flex;
+  gap: var(--sp-sm);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.post-card__tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--vermillion);
+  background: rgba(214, 50, 48, 0.08);
+  padding: 0.2em 0.6em;
+  border-radius: 2px;
+}
+
+.post-card__date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  color: var(--ink-ghost);
+}
+
+.post-card__title {
+  font-size: var(--fs-2xl);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  max-width: 600px;
+  transition: color 0.3s var(--ease-out);
+}
+
+.post-card:hover .post-card__title {
+  color: var(--vermillion-dark);
+}
+
+.post-card__excerpt {
+  font-size: var(--fs-base);
+  color: var(--ink-faded);
+  max-width: 550px;
+  line-height: 1.65;
+}
+
+.post-card__read-more {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-faded);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  transition: color 0.3s var(--ease-out), gap 0.3s var(--ease-out);
+}
+
+.post-card:hover .post-card__read-more {
+  color: var(--vermillion);
+  gap: 1em;
+}
+
+/* ====================================================
+   POST PAGE HERO — Dramatic, immersive
+   ==================================================== */
+.post-hero {
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--sp-3xl) var(--sp-md) var(--sp-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient color wash behind halftone */
+.post-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at 80% 20%, var(--vermillion-glow) 0%, transparent 40%),
+    radial-gradient(ellipse at 60% 70%, var(--indigo-glow) 0%, transparent 45%),
+    radial-gradient(ellipse at 30% 40%, var(--rose-glow) 0%, transparent 35%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- TRUE HALFTONE for post hero ---- */
+.post-hero__halftone {
+  position: absolute;
+  top: 0;
+  right: -5%;
+  width: 65vw;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Layer 1: Large halftone dots, gradient-mapped */
+.post-hero__halftone-layer-1 {
+  position: absolute;
+  inset: -10%;
+  background:
+    radial-gradient(closest-side, #777, #fff) 0 / 16px 16px space,
+    linear-gradient(160deg, #999 0%, #ddd 40%, #fff 70%);
+  background-blend-mode: multiply;
+  filter: contrast(14);
+  mix-blend-mode: multiply;
+  transform: rotate(-12deg) scale(1.2);
+  opacity: 0.12;
+}
+
+/* Layer 2: Vermillion-tinted halftone, offset angle */
+.post-hero__halftone-layer-2 {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(closest-side, #888, #fff) 5px 5px / 20px 20px space,
+    radial-gradient(ellipse at 60% 40%, #aaa, #fff 60%);
+  background-blend-mode: multiply;
+  filter: contrast(18);
+  transform: rotate(20deg) scale(1.3);
+  opacity: 0.07;
+}
+
+/* Vermillion color overlay on layer 2 */
+.post-hero__halftone-layer-2::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, var(--vermillion), transparent 65%);
+  mix-blend-mode: color;
+  opacity: 0.35;
+}
+
+/* Layer 3: Indigo accent dots, tight grid */
+.post-hero__halftone::after {
+  content: '';
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  width: 55%;
+  height: 65%;
+  background:
+    radial-gradient(closest-side, #888, #fff) 3px 3px / 12px 12px space,
+    radial-gradient(circle at 40% 50%, #bbb, #fff 50%);
+  background-blend-mode: multiply;
+  filter: contrast(20);
+  transform: rotate(-3deg);
+  opacity: 0.06;
+  border-radius: 40% 60% 50% 50%;
+}
+
+.post-hero__meta {
+  display: flex;
+  gap: var(--sp-md);
+  align-items: center;
+  margin-bottom: var(--sp-sm);
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-out) 0.2s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+.post-hero__tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--paper);
+  background: var(--vermillion);
+  padding: 0.35em 0.8em;
+}
+
+.post-hero__date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  color: var(--ink-ghost);
+  letter-spacing: 0.05em;
+}
+
+.post-hero__title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  max-width: 800px;
+  margin-bottom: var(--sp-sm);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s var(--ease-out) 0.4s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+.post-hero__subtitle {
+  font-size: var(--fs-lg);
+  color: var(--ink-faded);
+  font-style: italic;
+  max-width: 600px;
+  line-height: 1.45;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-out) 0.6s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+.post-hero__author {
+  margin-top: var(--sp-md);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-out) 0.8s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+.post-hero__author-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-image: radial-gradient(circle, var(--vermillion) 2.5px, transparent 2.5px);
+  background-size: 7px 7px;
+  border: 2px solid var(--vermillion);
+}
+
+.post-hero__author-info {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  color: var(--ink-faded);
+  line-height: 1.6;
+}
+
+.post-hero__author-name {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* ====================================================
+   POST CONTENT — Tight, readable, dramatic accents
+   ==================================================== */
+.post-content {
+  padding: var(--sp-xl) var(--sp-md);
+  position: relative;
+}
+
+.post-content > .container > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.post-content > .container > .visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.post-content p {
+  font-size: var(--fs-base);
+  line-height: 1.85;
+  color: var(--ink-light);
+  margin-bottom: var(--sp-md);
+}
+
+.post-content h2 {
+  margin-top: var(--sp-xl);
+  margin-bottom: var(--sp-md);
+  padding-top: var(--sp-md);
+  position: relative;
+}
+
+.post-content h2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, var(--vermillion), var(--indigo));
+}
+
+.post-content h3 {
+  margin-top: var(--sp-lg);
+  margin-bottom: var(--sp-sm);
+  font-size: var(--fs-lg);
+  color: var(--ink);
+}
+
+/* ====================================================
+   PULL QUOTE — Large, dramatic, gradient halftone bg
+   ==================================================== */
+.pull-quote {
+  margin: var(--sp-xl) calc(-1 * var(--sp-md));
+  padding: var(--sp-lg) var(--sp-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.pull-quote__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* TRUE halftone gradient in pull quotes */
+.pull-quote__bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(closest-side, #888, #fff) 0 / 10px 10px space,
+    linear-gradient(135deg, #bbb 0%, #fff 50%);
+  background-blend-mode: multiply;
+  filter: contrast(14);
+  mix-blend-mode: multiply;
+  opacity: 0.06;
+}
+
+/* Vermillion color tint over halftone */
+.pull-quote__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(214, 50, 48, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.pull-quote__text {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-xl);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink);
+  position: relative;
+  max-width: 600px;
+}
+
+.pull-quote__text::before {
+  content: '\201C';
+  font-size: 6rem;
+  color: var(--vermillion);
+  opacity: 0.25;
+  position: absolute;
+  top: -0.3em;
+  left: -0.15em;
+  line-height: 1;
+  font-family: 'Playfair Display', serif;
+}
+
+.pull-quote__attribution {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  color: var(--ink-ghost);
+  margin-top: var(--sp-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ====================================================
+   SECTION DIVIDER — Halftone strip
+   ==================================================== */
+.section-divider {
+  width: 100%;
+  height: 50px;
+  margin: var(--sp-lg) 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-divider__line {
+  width: 100%;
+  height: 1px;
+  background: var(--ink);
+  opacity: 0.1;
+}
+
+.section-divider__dot-cluster {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-divider__dots {
+  width: 80px;
+  height: 20px;
+  background:
+    radial-gradient(closest-side, #888, #fff) 0 / 6px 6px space,
+    linear-gradient(to right, #fff, #aaa, #fff);
+  background-blend-mode: multiply;
+  filter: contrast(16);
+  mix-blend-mode: multiply;
+  opacity: 0.25;
+}
+
+/* ====================================================
+   CHAPTER NUMBERS — Positioned LEFT, decorative
+   ==================================================== */
+/* Chapter number — large ghost watermark, offset far right to avoid title overlap */
+.chapter-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 7rem;
+  font-weight: 900;
+  line-height: 1;
+  position: absolute;
+  top: -0.3em;
+  right: -1.5rem;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+  /* Gradient text fill for artsy effect */
+  background: linear-gradient(135deg, rgba(214, 50, 48, 0.08), rgba(45, 58, 140, 0.06));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ====================================================
+   INSIGHT BOX — Bolder halftone, gradient accent
+   ==================================================== */
+.insight-box {
+  margin: var(--sp-lg) 0;
+  padding: var(--sp-md) var(--sp-lg);
+  background: var(--paper-warm);
+  border-left: 4px solid var(--vermillion);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient border effect */
+.insight-box::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--vermillion), var(--indigo));
+}
+
+/* True halftone gradient on right side */
+.insight-box::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 55%;
+  height: calc(100% + 20px);
+  background:
+    radial-gradient(closest-side, #888, #fff) 0 / 8px 8px space,
+    linear-gradient(to left, #ccc, #fff 60%);
+  background-blend-mode: multiply;
+  filter: contrast(14);
+  mix-blend-mode: multiply;
+  opacity: 0.05;
+}
+
+.insight-box__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--vermillion);
+  margin-bottom: var(--sp-xs);
+}
+
+.insight-box__text {
+  font-size: var(--fs-base);
+  line-height: 1.7;
+  color: var(--ink-light);
+  position: relative;
+  z-index: 1;
+}
+
+/* ====================================================
+   KIMI CAPABILITY CHART — Visual bar comparison
+   ==================================================== */
+.kimi-chart {
+  margin: var(--sp-xl) 0;
+  padding: var(--sp-lg);
+  background: var(--paper-warm);
+  position: relative;
+  overflow: hidden;
+}
+
+.kimi-chart::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--vermillion), var(--indigo));
+}
+
+.kimi-chart__title {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.2em;
+}
+
+.kimi-chart__subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  color: var(--ink-ghost);
+  letter-spacing: 0.03em;
+  margin-bottom: var(--sp-lg);
+}
+
+.kimi-chart__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+}
+
+.kimi-chart__row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: var(--sp-md);
+  align-items: center;
+}
+
+.kimi-chart__label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+}
+
+.kimi-chart__model {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.kimi-chart__desc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--ink-ghost);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.kimi-chart__bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.kimi-chart__bar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.kimi-chart__bar-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--ink-ghost);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.kimi-chart__bar-track {
+  width: 100%;
+  height: 10px;
+  background: rgba(26, 26, 46, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.kimi-chart__bar {
+  height: 100%;
+  transition: width 1.2s var(--ease-out);
+}
+
+.kimi-chart__bar--emotional {
+  background: linear-gradient(to right, var(--vermillion), var(--rose));
+}
+
+.kimi-chart__bar--agentic {
+  background: linear-gradient(to right, var(--indigo), var(--teal));
+}
+
+.kimi-chart__takeaway {
+  margin-top: var(--sp-md);
+  padding-top: var(--sp-sm);
+  border-top: 1px solid rgba(26, 26, 46, 0.06);
+  font-family: 'Newsreader', serif;
+  font-size: var(--fs-sm);
+  font-style: italic;
+  color: var(--ink-faded);
+  max-width: 500px;
+}
+
+@media (max-width: 768px) {
+  .kimi-chart__row {
+    grid-template-columns: 1fr;
+    gap: var(--sp-xs);
+  }
+}
+
+/* ====================================================
+   DATA TABLE
+   ==================================================== */
+.data-table {
+  width: 100%;
+  margin: var(--sp-md) 0;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+
+.data-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-faded);
+  text-align: left;
+  padding: var(--sp-sm) var(--sp-sm);
+  border-bottom: 2px solid var(--ink);
+}
+
+.data-table td {
+  padding: var(--sp-sm);
+  border-bottom: 1px solid rgba(26, 26, 46, 0.06);
+  color: var(--ink-light);
+  vertical-align: top;
+}
+
+.data-table tr:hover td {
+  background: var(--paper-warm);
+}
+
+/* ====================================================
+   PRINCIPLES LIST
+   ==================================================== */
+.principles-list {
+  list-style: none;
+  counter-reset: principles;
+  margin: var(--sp-md) 0;
+}
+
+.principles-list li {
+  counter-increment: principles;
+  padding: var(--sp-sm) 0 var(--sp-sm) var(--sp-xl);
+  border-bottom: 1px solid rgba(26, 26, 46, 0.06);
+  position: relative;
+}
+
+.principles-list li::before {
+  content: counter(principles, decimal-leading-zero);
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-2xl);
+  color: var(--vermillion);
+  opacity: 0.12;
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  line-height: 1;
+}
+
+.principles-list li strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-md);
+  margin-bottom: var(--sp-xs);
+  color: var(--ink);
+}
+
+/* ====================================================
+   HALFTONE SECTION BREAKS — Bold gradient bands
+   ==================================================== */
+.halftone-break {
+  width: 100%;
+  height: 60px;
+  position: relative;
+  margin: var(--sp-xl) 0;
+  overflow: hidden;
+}
+
+.halftone-break__gradient {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* TRUE halftone gradient band — dots vary in size */
+.halftone-break__gradient::before {
+  content: '';
+  position: absolute;
+  inset: -20px 0;
+  background:
+    radial-gradient(closest-side, #888, #fff) 0 / 10px 10px space,
+    linear-gradient(to right, #fff, #aaa 30%, #999 50%, #aaa 70%, #fff);
+  background-blend-mode: multiply;
+  filter: contrast(16);
+  mix-blend-mode: multiply;
+  opacity: 0.1;
+}
+
+/* Color tint over the halftone band — warm gradient */
+.halftone-break__gradient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right,
+    transparent 10%,
+    rgba(214, 50, 48, 0.06) 30%,
+    rgba(45, 58, 140, 0.04) 60%,
+    transparent 90%
+  );
+  pointer-events: none;
+}
+
+/* ====================================================
+   AUTHOR CONNECT — End of essay CTA
+   ==================================================== */
+.author-connect {
+  padding: var(--sp-xl) var(--sp-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.author-connect::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, var(--vermillion-glow) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 50%, var(--indigo-glow) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.author-connect__inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--sp-lg);
+  position: relative;
+  border-top: 1px solid rgba(26, 26, 46, 0.08);
+}
+
+.author-connect__heading {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-xl);
+  font-style: italic;
+  margin-bottom: var(--sp-xs);
+}
+
+.author-connect__text {
+  color: var(--ink-faded);
+  font-size: var(--fs-base);
+  line-height: 1.7;
+  max-width: 500px;
+  margin-bottom: var(--sp-lg);
+}
+
+.author-connect__links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-sm);
+}
+
+.author-connect__link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+  padding: var(--sp-sm) var(--sp-md);
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid rgba(26, 26, 46, 0.06);
+  transition: all 0.3s var(--ease-out);
+}
+
+.author-connect__link:hover {
+  border-color: var(--vermillion);
+  background: rgba(214, 50, 48, 0.02);
+}
+
+.author-connect__link--primary {
+  border-color: rgba(214, 50, 48, 0.15);
+}
+
+.author-connect__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--vermillion);
+}
+
+.author-connect__handle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.author-connect__note {
+  font-family: 'Newsreader', serif;
+  font-size: var(--fs-xs);
+  font-style: italic;
+  color: var(--ink-ghost);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .author-connect__links {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ====================================================
+   FOOTER — Tight, with bold halftone
+   ==================================================== */
+.footer {
+  padding: var(--sp-xl) var(--sp-md);
+  border-top: 1px solid rgba(26, 26, 46, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer__halftone {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.footer__halftone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(closest-side, #888, #fff) 0 / 8px 8px space,
+    linear-gradient(to top, #ccc, #fff 50%);
+  background-blend-mode: multiply;
+  filter: contrast(14);
+  mix-blend-mode: multiply;
+  opacity: 0.06;
+}
+
+.footer__halftone::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: radial-gradient(ellipse at 80% 80%, rgba(214, 50, 48, 0.04), transparent 50%);
+  pointer-events: none;
+}
+
+.footer__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  position: relative;
+}
+
+.footer__left {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  color: var(--ink-ghost);
+  letter-spacing: 0.05em;
+}
+
+.footer__right {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  color: var(--ink-ghost);
+}
+
+.footer__motto {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-md);
+  font-style: italic;
+  color: var(--ink-faded);
+  margin-bottom: var(--sp-xs);
+}
+
+.footer__socials {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  margin-bottom: var(--sp-xs);
+}
+
+.footer__socials a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  color: var(--ink-ghost);
+  text-decoration: none;
+  border-bottom: none;
+  letter-spacing: 0.05em;
+  transition: color 0.3s var(--ease-out);
+}
+
+.footer__socials a:hover {
+  color: var(--vermillion);
+}
+
+.footer__dot {
+  color: var(--ink-ghost);
+  opacity: 0.4;
+}
+
+/* ====================================================
+   EPIGRAPH (opening quotes)
+   ==================================================== */
+.epigraph {
+  margin: var(--sp-xl) 0;
+  padding: var(--sp-md) 0;
+  position: relative;
+}
+
+.epigraph__text {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-lg);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--ink-light);
+  max-width: 550px;
+  margin-bottom: var(--sp-xs);
+}
+
+.epigraph__text + .epigraph__text {
+  margin-top: var(--sp-md);
+}
+
+.epigraph__dot-accent {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* True halftone circle accent */
+.epigraph__dot-accent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(closest-side, #888, #fff) 0 / 8px 8px space,
+    radial-gradient(circle at center, #aaa, #fff 60%);
+  background-blend-mode: multiply;
+  filter: contrast(16);
+  mix-blend-mode: multiply;
+  border-radius: 50%;
+  opacity: 0.15;
+}
+
+/* Vermillion color overlay */
+.epigraph__dot-accent::after {
+  content: '';
+  position: absolute;
+  inset: -15px;
+  background: radial-gradient(circle, var(--vermillion) 0%, transparent 60%);
+  mix-blend-mode: color;
+  opacity: 0.25;
+  border-radius: 50%;
+}
+
+/* ====================================================
+   MARGIN NOTE
+   ==================================================== */
+.margin-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  color: var(--ink-ghost);
+  border-left: 2px solid var(--vermillion);
+  padding-left: var(--sp-sm);
+  margin: var(--sp-md) 0;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+/* ====================================================
+   ANIMATIONS
+   ==================================================== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.2; }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Scroll-triggered reveals */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ====================================================
+   BACK TO TOP
+   ==================================================== */
+.back-to-top {
+  position: fixed;
+  bottom: var(--sp-lg);
+  right: var(--sp-lg);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-sm);
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s var(--ease-out);
+  z-index: 100;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--vermillion);
+}
+
+/* ====================================================
+   BILINGUAL TOGGLE
+   ==================================================== */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-xs);
+  color: var(--ink-ghost);
+  cursor: pointer;
+  padding: 0.4em 0.8em;
+  border: 1px solid rgba(26, 26, 46, 0.1);
+  background: none;
+  transition: all 0.3s var(--ease-out);
+  letter-spacing: 0.05em;
+}
+
+.lang-toggle:hover {
+  color: var(--vermillion);
+  border-color: var(--vermillion);
+}
+
+.lang-toggle__label--active {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.lang-toggle__separator {
+  color: var(--ink-ghost);
+  opacity: 0.4;
+}
+
+@media (max-width: 768px) {
+  .lang-toggle {
+    padding: 0.3em 0.6em;
+    font-size: 0.7rem;
+  }
+}
+
+/* --- Language visibility --- */
+html:not([lang="zh"]) [lang="zh"] {
+  display: none !important;
+}
+html[lang="zh"] [lang="en"]:not(.lang-keep) {
+  display: none !important;
+}
+
+/* --- CJK Typography --- */
+html[lang="zh"] body {
+  font-family: var(--font-serif-zh);
+}
+
+html[lang="zh"] h1,
+html[lang="zh"] h2,
+html[lang="zh"] h3,
+html[lang="zh"] h4,
+html[lang="zh"] h5,
+html[lang="zh"] h6 {
+  font-family: 'Noto Serif SC', 'Playfair Display', serif;
+  letter-spacing: 0;
+}
+
+html[lang="zh"] .post-content p,
+html[lang="zh"] .about-text {
+  line-height: 2;
+}
+
+html[lang="zh"] .pull-quote__text,
+html[lang="zh"] .epigraph__text {
+  font-family: var(--font-serif-zh);
+}
+
+/* ====================================================
+   TOC (Table of Contents) sidebar
+   ==================================================== */
+.toc {
+  position: fixed;
+  left: var(--sp-lg);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: none;
+}
+
+@media (min-width: 1300px) {
+  .toc {
+    display: block;
+  }
+}
+
+.toc__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toc__item {
+  position: relative;
+  padding-left: var(--sp-md);
+}
+
+.toc__item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ink-ghost);
+  transform: translateY(-50%);
+  transition: all 0.3s var(--ease-out);
+}
+
+.toc__item.active::before {
+  width: 8px;
+  height: 8px;
+  background: var(--vermillion);
+  box-shadow: 0 0 8px var(--vermillion-glow);
+}
+
+.toc__link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-ghost);
+  text-decoration: none;
+  border-bottom: none;
+  transition: color 0.3s var(--ease-out);
+  white-space: nowrap;
+}
+
+.toc__item.active .toc__link {
+  color: var(--vermillion);
+}
+
+/* ====================================================
+   RESPONSIVE
+   ==================================================== */
+@media (max-width: 768px) {
+  :root {
+    --fs-base: 1rem;
+    --fs-lg: 1.35rem;
+    --fs-xl: 1.8rem;
+    --fs-2xl: 2.2rem;
+    --fs-3xl: 2.8rem;
+    --fs-hero: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  .hero {
+    min-height: 60vh;
+    padding: var(--sp-xl) var(--sp-md);
+  }
+
+  .post-hero {
+    min-height: 50vh;
+    padding: var(--sp-xl) var(--sp-md) var(--sp-lg);
+  }
+
+  .pull-quote {
+    margin: var(--sp-lg) 0;
+    padding: var(--sp-md);
+  }
+
+  .pull-quote__text {
+    font-size: var(--fs-lg);
+  }
+
+  .chapter-number {
+    font-size: 3.5rem;
+    right: -0.5rem;
+  }
+
+  .nav__links {
+    display: none;
+  }
+
+  .footer__content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-md);
+  }
+
+  .post-card__number {
+    display: none;
+  }
+
+  .back-to-top {
+    right: var(--sp-sm);
+    bottom: var(--sp-sm);
+  }
+
+  .hero__sparrowhawk {
+    top: 15%;
+    right: -5%;
+    width: 200px;
+  }
+
+  .hero__extended {
+    font-size: 1.1rem;
+  }
+
+  .post-hero__sparrowhawk {
+    width: 100px;
+    right: 2%;
+  }
+
+  .about-sparrowhawk {
+    display: none;
+  }
+
+  .footer__sparrowhawk {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--sp-sm);
+  }
+}
+
+/* ====================================================
+   PRINT STYLES
+   ==================================================== */
+@media print {
+  body::before { display: none; }
+  .nav, .progress-bar, .back-to-top, .toc { display: none; }
+  .post-content > .container > * { opacity: 1; transform: none; }
+  .reveal { opacity: 1; transform: none; }
+}

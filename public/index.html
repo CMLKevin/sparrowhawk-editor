@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Flash prevention: set language before CSS renders -->
+  <script>
+    (function(){var l=localStorage.getItem('sparrowhawk-lang');
+    if(l==='zh')document.documentElement.setAttribute('lang','zh');})();
+  </script>
+
+  <title
+    data-lang-en="Sparrowhawk &mdash; Building at the intersection of AI, emotion, and ethics"
+    data-lang-zh="Sparrowhawk &mdash; AI、情感与伦理的交汇处"
+  >Sparrowhawk &mdash; Building at the intersection of AI, emotion, and ethics</title>
+  <meta name="description" content="Thoughts on AI emotional companionship, consciousness, loneliness, and building systems that care. By Pigeon (Kevin Lin) at sparrowhawk.dev.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://sparrowhawk.dev/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sparrowhawk.dev/">
+  <meta property="og:title" content="Sparrowhawk — Building at the intersection of AI, emotion, and ethics">
+  <meta property="og:description" content="Thoughts on AI emotional companionship, consciousness, loneliness, and building systems that care. By Pigeon (Kevin Lin).">
+  <meta property="og:site_name" content="Sparrowhawk">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@hydr0c0don3">
+  <meta name="twitter:creator" content="@hydr0c0don3">
+  <meta name="twitter:title" content="Sparrowhawk — AI, emotion, and ethics">
+  <meta name="twitter:description" content="Thoughts on AI emotional companionship, consciousness, loneliness, and building systems that care. By Pigeon (Kevin Lin).">
+
+  <!-- Additional SEO -->
+  <meta name="author" content="Kevin Lin (Pigeon)">
+  <meta name="theme-color" content="#D63230">
+  <meta name="robots" content="index, follow">
+  <link rel="alternate" type="application/rss+xml" title="Sparrowhawk RSS Feed" href="https://sparrowhawk.dev/feed.xml">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "name": "Sparrowhawk",
+        "url": "https://sparrowhawk.dev/",
+        "description": "Thoughts on AI emotional companionship, consciousness, loneliness, and building systems that care.",
+        "inLanguage": ["en", "zh"],
+        "author": {
+          "@type": "Person",
+          "name": "Kevin Lin",
+          "alternateName": "Pigeon",
+          "url": "https://sparrowhawk.dev/",
+          "sameAs": [
+            "https://x.com/hydr0c0don3",
+            "https://github.com/CMLKevin"
+          ],
+          "jobTitle": "Developer & AI Researcher",
+          "knowsAbout": ["AI Companionship", "Emotional AI", "Cognitive Architecture", "AI Consciousness"]
+        }
+      },
+      {
+        "@type": "Blog",
+        "name": "Sparrowhawk",
+        "url": "https://sparrowhawk.dev/",
+        "description": "Thoughts on AI emotional companionship, consciousness, loneliness, and building systems that care.",
+        "blogPost": [
+          {
+            "@type": "BlogPosting",
+            "headline": "AI, Myself, Emotions, and the World",
+            "url": "https://sparrowhawk.dev/essays/ai-myself-emotions-and-the-world.html",
+            "datePublished": "2026-02-01",
+            "description": "On the future of AI emotional companionship — the capability conservation problem, the loneliness epidemic, cognitive architectures, and why building well is a moral imperative."
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Vercel Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav__logo">sparrowhawk<span>.</span></a>
+    <ul class="nav__links">
+      <li><a href="index.html"><span lang="en">Home</span><span lang="zh">首页</span></a></li>
+      <li><a href="#writing"><span lang="en">Writing</span><span lang="zh">文章</span></a></li>
+      <li><a href="#about"><span lang="en">About</span><span lang="zh">关于</span></a></li>
+    </ul>
+    <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+      <span class="lang-toggle__label lang-toggle__label--active" data-lang="en">EN</span>
+      <span class="lang-toggle__separator">/</span>
+      <span class="lang-toggle__label" data-lang="zh">中</span>
+    </button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__halftone-bg"></div>
+    <div class="hero__halftone-accent"></div>
+
+    <!-- Sparrowhawk silhouette — soaring across the hero -->
+    <div class="hero__sparrowhawk" aria-hidden="true">
+      <img src="assets/sparrowhawk-soaring.svg" alt="" loading="eager">
+    </div>
+
+    <div class="container container--wide">
+      <div lang="en">
+        <div class="hero__label">Developer &middot; AI Researcher &middot; Shanghai</div>
+        <h1 class="hero__title">
+          I build things<br>
+          that <span class="highlight">care</span><br>
+          <span class="hero__extended">and loves <em>you</em> and <em>the world</em>.</span>
+        </h1>
+        <p class="hero__subtitle">
+          Thoughts on AI companionship, consciousness, loneliness,
+          and what happens when you take emotional architecture seriously.
+        </p>
+      </div>
+      <div lang="zh">
+        <div class="hero__label">开发者 &middot; AI 研究者 &middot; 上海</div>
+        <h1 class="hero__title">
+          我造的东西<br>
+          会<span class="highlight">在乎</span><br>
+          <span class="hero__extended">在乎<em>你</em>，也在乎<em>这个世界</em>。</span>
+        </h1>
+        <p class="hero__subtitle">
+          关于 AI 陪伴、意识、孤独，
+          以及认真对待情感架构之后会发生什么。
+        </p>
+      </div>
+      <div class="hero__socials">
+        <a href="https://x.com/hydr0c0don3" target="_blank" rel="noopener">Twitter</a>
+        <span>&middot;</span>
+        <a href="https://discord.com/users/pigeon_and_co." target="_blank" rel="noopener">Discord</a>
+        <span>&middot;</span>
+        <a href="mailto:cmlkevinlin@gmail.com">Email</a>
+        <span>&middot;</span>
+        <a href="https://github.com/CMLKevin" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator (compact) -->
+    <div class="scroll-indicator">
+      <div class="scroll-indicator__line"></div>
+      <span class="scroll-indicator__text" lang="en">Scroll</span>
+      <span class="scroll-indicator__text" lang="zh">下滑</span>
+    </div>
+  </section>
+
+  <!-- Posts Section -->
+  <section class="posts-section" id="writing">
+    <div class="container container--wide">
+      <div class="posts-section__divider"></div>
+      <div class="posts-section__label reveal" lang="en">Writing</div>
+      <div class="posts-section__label reveal" lang="zh">文章</div>
+
+      <!-- Post 1 -->
+      <a href="essays/ai-myself-emotions-and-the-world.html" class="post-card reveal">
+        <span class="post-card__number">01</span>
+        <div class="post-card__meta">
+          <span class="post-card__tag" lang="en">Manifesto</span>
+          <span class="post-card__tag" lang="zh">宣言</span>
+          <span class="post-card__tag" lang="en">AI Companionship</span>
+          <span class="post-card__tag" lang="zh">AI 陪伴</span>
+          <span class="post-card__date" lang="en">February 2026</span>
+          <span class="post-card__date" lang="zh">2026年2月</span>
+        </div>
+        <h2 class="post-card__title" lang="en">AI, Myself, Emotions, and the World</h2>
+        <h2 class="post-card__title" lang="zh">AI、我、情感与世界</h2>
+        <p class="post-card__excerpt" lang="en">
+          On the future of AI emotional companionship &mdash; a builder's worldview.
+          The capability conservation problem, the loneliness epidemic, cognitive architectures,
+          and why building well is a moral imperative.
+        </p>
+        <p class="post-card__excerpt" lang="zh">
+          关于 AI 情感陪伴的未来：一个构建者的世界观。能力守恒问题、孤独流行病、认知架构，以及为什么好好造是一种道德义务。
+        </p>
+        <span class="post-card__read-more" lang="en">
+          Read essay <span>&rarr;</span>
+        </span>
+        <span class="post-card__read-more" lang="zh">
+          阅读全文 <span>&rarr;</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="about-section__halftone"></div>
+
+    <!-- Sparrowhawk perched — decorative accent -->
+    <div class="about-sparrowhawk" aria-hidden="true">
+      <img src="assets/sparrowhawk-perched.svg" alt="" loading="lazy">
+    </div>
+
+    <div class="container container--wide">
+      <div class="section-divider reveal">
+        <div class="section-divider__line"></div>
+        <div class="section-divider__dot-cluster"><div class="section-divider__dots"></div></div>
+      </div>
+
+      <div class="about-grid">
+        <div class="reveal" lang="en">
+          <h3>About</h3>
+          <p class="about-text">
+            I'm Kevin Lin, also known as Pigeon &mdash; an 18-year-old developer and AI researcher
+            based in Shanghai. I think about AI companionship, emotional architectures,
+            consciousness as a design constraint, and why the loneliness epidemic is a
+            problem that builders &mdash; not just therapists &mdash; need to take seriously.
+          </p>
+          <p class="about-text">
+            I've built systems that scaled to hundreds of thousands of users, AI forecasting engines,
+            quantitative trading bots, and cognitive architectures for emotional AI.
+            I value epistemic honesty over comfort.
+          </p>
+        </div>
+        <div class="reveal" lang="zh">
+          <h3>关于我</h3>
+          <p class="about-text">
+            我叫 Kevin Lin，网名 Pigeon。十八岁，开发者，AI 研究者，坐标上海。我关注的问题是 AI 陪伴、情感架构、意识作为设计约束，以及为什么孤独这件事不能只丢给心理咨询师，做技术的人也得认真面对。
+          </p>
+          <p class="about-text">
+            我做过月活三十多万的内容平台、AI 预测引擎、量化交易机器人，还有情感 AI 的认知架构。比起让人舒服的话，我更在意说的是不是真的。
+          </p>
+        </div>
+        <div class="reveal reveal-delay-1">
+          <h3 lang="en">What I Ship</h3>
+          <h3 lang="zh">做过的东西</h3>
+          <ul class="ship-list">
+            <li class="ship-list__item">
+              <span class="ship-list__name" lang="en">300K+ MAU Content Platform</span>
+              <span class="ship-list__name" lang="zh">30万+ MAU 内容平台</span>
+              <span class="ship-list__detail" lang="en">Solo build, age 15</span>
+              <span class="ship-list__detail" lang="zh">15岁独立开发</span>
+            </li>
+            <li class="ship-list__item">
+              <span class="ship-list__name">ORACLE Forecasting Engine</span>
+              <span class="ship-list__detail" lang="en">Superforecaster-level @ $3/query</span>
+              <span class="ship-list__detail" lang="zh">超级预测者水平 @ $3/次</span>
+            </li>
+            <li class="ship-list__item">
+              <span class="ship-list__name">Evelyn-T1 Cognitive Architecture</span>
+              <span class="ship-list__detail" lang="en">AI companionship CNS</span>
+              <span class="ship-list__detail" lang="zh">AI 陪伴中枢神经系统</span>
+            </li>
+            <li class="ship-list__item">
+              <span class="ship-list__name">Polypigeon Trading Bot</span>
+              <span class="ship-list__detail" lang="en">Prediction market arbitrage</span>
+              <span class="ship-list__detail" lang="zh">预测市场套利</span>
+            </li>
+            <li class="ship-list__item">
+              <span class="ship-list__name">4orever.ai</span>
+              <span class="ship-list__detail" lang="en">In development</span>
+              <span class="ship-list__detail" lang="zh">开发中</span>
+            </li>
+          </ul>
+
+          <h3 class="connect-heading" lang="en">Connect</h3>
+          <h3 class="connect-heading" lang="zh">联系我</h3>
+          <div class="connect-block">
+            <a href="https://x.com/hydr0c0don3" target="_blank" rel="noopener" class="connect-link connect-link--primary">
+              <span class="connect-link__icon">&Xscr;</span>
+              <span class="connect-link__info">
+                <span class="connect-link__handle">@hydr0c0don3</span>
+                <span class="connect-link__note" lang="en">Cold DMs open &mdash; happy to chat about anything.</span>
+                <span class="connect-link__note" lang="zh">欢迎私信，随便聊。</span>
+              </span>
+            </a>
+            <a href="https://discord.com/users/pigeon_and_co." target="_blank" rel="noopener" class="connect-link">
+              <span class="connect-link__icon">&#9672;</span>
+              <span class="connect-link__info">
+                <span class="connect-link__handle">pigeon_and_co.</span>
+                <span class="connect-link__note" lang="en">For deeper discussions &amp; collab pitches.</span>
+                <span class="connect-link__note" lang="zh">深度讨论和合作请走这边。</span>
+              </span>
+            </a>
+            <a href="mailto:cmlkevinlin@gmail.com" class="connect-link">
+              <span class="connect-link__icon">&orarr;</span>
+              <span class="connect-link__info">
+                <span class="connect-link__handle">cmlkevinlin@gmail.com</span>
+                <span class="connect-link__note" lang="en">Philosophy, the AI companion landscape, serious collabs only.</span>
+                <span class="connect-link__note" lang="zh">哲学、AI 陪伴行业、认真的合作。</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__halftone"></div>
+
+    <!-- Sparrowhawk diving — footer accent -->
+    <div class="footer__sparrowhawk" aria-hidden="true">
+      <img src="assets/sparrowhawk-diving.svg" alt="" loading="lazy">
+    </div>
+
+    <div class="footer__content">
+      <div class="footer__left">
+        <div class="footer__motto" lang="en">&ldquo;Build with care, or don't build at all.&rdquo;</div>
+        <div class="footer__motto" lang="zh">&ldquo;要么用心造，要么别造。&rdquo;</div>
+        <div class="footer__socials">
+          <a href="https://x.com/hydr0c0don3" target="_blank" rel="noopener">Twitter</a>
+          <span class="footer__dot">&middot;</span>
+          <a href="https://discord.com/users/pigeon_and_co." target="_blank" rel="noopener">Discord</a>
+          <span class="footer__dot">&middot;</span>
+          <a href="mailto:cmlkevinlin@gmail.com">Email</a>
+          <span class="footer__dot">&middot;</span>
+          <a href="https://github.com/CMLKevin" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <span>&copy; 2026 Pigeon (Kevin Lin). Shanghai.</span>
+      </div>
+      <div class="footer__right">
+        <span class="footer__brand">sparrowhawk<span>.</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+
+  <style>
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.15; transform: scaleY(1); }
+      50% { opacity: 0.4; transform: scaleY(1.2); transform-origin: top; }
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out) 1.2s forwards;
+      text-align: center;
+      z-index: 1;
+    }
+    .scroll-indicator__line {
+      width: 1px;
+      height: 30px;
+      background: linear-gradient(to bottom, var(--ink), transparent);
+      opacity: 0.2;
+      margin: 0 auto;
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    .scroll-indicator__text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--ink-ghost);
+      display: block;
+      margin-top: 0.3rem;
+    }
+
+    /* About section */
+    .about-section {
+      padding: var(--sp-xl) 0 var(--sp-2xl);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-section__halftone {
+      position: absolute;
+      top: 0;
+      left: -10%;
+      width: 45%;
+      height: 100%;
+      background:
+        radial-gradient(closest-side, #888, #fff) 0 / 8px 8px space,
+        linear-gradient(160deg, #ccc, #fff 50%);
+      background-blend-mode: multiply;
+      filter: contrast(14);
+      mix-blend-mode: multiply;
+      opacity: 0.04;
+      transform: rotate(10deg);
+      pointer-events: none;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-xl);
+      margin-top: var(--sp-lg);
+      align-items: start;
+    }
+    .about-text {
+      color: var(--ink-faded);
+      line-height: 1.8;
+    }
+
+    /* Ship list */
+    .ship-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .ship-list__item {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--fs-xs);
+      color: var(--ink-faded);
+      padding: var(--sp-xs) 0;
+      border-bottom: 1px solid rgba(26,26,46,0.06);
+      display: flex;
+      justify-content: space-between;
+      gap: var(--sp-sm);
+      transition: background 0.2s ease;
+    }
+    .ship-list__item:hover {
+      background: rgba(214, 50, 48, 0.03);
+    }
+    .ship-list__name {
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .ship-list__detail {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* Connect section */
+    .connect-heading {
+      margin-top: var(--sp-lg);
+    }
+    .connect-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: var(--sp-xs);
+    }
+    .connect-link {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-sm);
+      padding: var(--sp-xs) 0;
+      border-bottom: 1px solid rgba(26,26,46,0.06);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s ease;
+    }
+    .connect-link:hover {
+      background: rgba(214, 50, 48, 0.03);
+      border-bottom-color: transparent;
+    }
+    .connect-link__icon {
+      font-size: var(--fs-md);
+      color: var(--vermillion);
+      width: 1.5em;
+      text-align: center;
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+    .connect-link__info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15em;
+    }
+    .connect-link__handle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+    .connect-link__note {
+      font-family: 'Newsreader', serif;
+      font-size: var(--fs-xs);
+      font-style: italic;
+      color: var(--ink-ghost);
+      line-height: 1.4;
+    }
+    .connect-link--primary .connect-link__handle {
+      color: var(--vermillion);
+    }
+
+    /* Footer socials */
+    .footer__socials {
+      display: flex;
+      gap: 0.5em;
+      align-items: center;
+      margin: var(--sp-xs) 0;
+    }
+    .footer__socials a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--fs-xs);
+      color: var(--ink-ghost);
+      text-decoration: none;
+      border-bottom: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s var(--ease-out);
+    }
+    .footer__socials a:hover {
+      color: var(--vermillion);
+    }
+    .footer__dot {
+      color: var(--ink-ghost);
+      opacity: 0.4;
+    }
+
+    /* Footer brand */
+    .footer__brand {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--ink-faded);
+      font-size: var(--fs-base);
+    }
+    .footer__brand span {
+      color: var(--vermillion);
+    }
+
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: var(--sp-lg);
+      }
+      .ship-list__detail {
+        display: none;
+      }
+      .connect-link__note {
+        display: none;
+      }
+    }
+  </style>
+</body>
+</html>
